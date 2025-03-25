@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "qCNLIQ5iEHg=",
+  "success": true,
+  "projectFilePath": "C:\\Diploma\\EvacSystem\\EvacProject\\EvacProject.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Roma\\.nuget\\packages\\microsoft.net.sdk.compilers.toolset\\9.0.200\\microsoft.net.sdk.compilers.toolset.9.0.200.nupkg.sha512"
+  ],
+  "logs": []
+}

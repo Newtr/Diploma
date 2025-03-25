@@ -1,0 +1,121 @@
+﻿@{
+    ViewData["Title"] = "Моделирование ситуации";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"]</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGZIul-FiQBCypdWJsez87JrtRAFa1WYM"></script>
+    <style>
+        #map {
+            height: 100%;
+            width: 100%;
+            min-height: 400px;
+        }
+        
+    </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<button id="simulateEmergency" onclick="simulateEmergency()">СМОДЕЛИРОВАТЬ ЧС</button>
+<p id="routeInfo"></p>
+
+<script>
+    let defaultPosition = { lat: 53.89143901482601, lng: 27.55978807853474 }; //БГТУ 53.89143901482601, 27.55978807853474
+    
+    let directionsService, directionsRenderer;
+    
+    let map;
+
+    let markers = [];
+    
+    function initMap()
+    {
+        map = new google.maps.Map(document.getElementById("map"),
+            {
+                zoom: 15,
+                center: defaultPosition
+            });
+        
+        let marker = new google.maps.Marker
+        ({
+            position: defaultPosition,
+            map: map,
+            title: 'Your Location'
+        });
+        
+        markers.push(marker);
+    }
+
+    function getUserLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    defaultPosition = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    console.log("Координаты пользователя:", defaultPosition);
+                    initMap()
+                },
+                (error) => {
+                    console.warn("Геолокация не разрешена, используются стандартные координаты.");
+                    console.log("Координаты по умолчанию:", defaultPosition);
+                    initMap()
+                }
+            );
+        } else {
+            console.error("Геолокация не поддерживается браузером.");
+            initMap()
+        }
+    }
+    
+    function simulateEmergency()
+    {
+        const metroStation = { lat: 53.90694161120404, lng: 27.43763745896156 };    //ст.м Каменная Горка 53.90694161120404, 27.43763745896156
+        
+        clearMarkers();
+        
+        directionsService = new google.maps.DirectionsService();
+        directionsRenderer = new google.maps.DirectionsRenderer();
+        
+
+        directionsRenderer.setMap(map);
+
+        const request = {
+            origin: defaultPosition,
+            destination: metroStation,
+            travelMode: google.maps.TravelMode.DRIVING
+        };
+
+        directionsService.route(request, (result, status) => {
+            if (status === google.maps.DirectionsStatus.OK) {
+                directionsRenderer.setDirections(result);
+
+                document.getElementById("routeInfo").innerHTML = `
+                    <strong>До ближайшей станции метро "Площадь Ленина" ходят:</strong><br>
+                    🚍 Автобусы: 1, 100, 69<br>
+                    🚎 Троллейбусы: 3, 6, 12<br>
+                    🚐 Маршрутки: 1073, 1208
+                `;
+            } else {
+                alert("Не удалось построить маршрут!");
+            }
+        });
+    }
+
+    function clearMarkers() {
+        for (let i = 0; i < markers.length; i++) {
+            markers[i].setMap(null);
+        }
+        markers = [];
+    }
+    
+    window.onload = getUserLocation;
+</script>
+</body>
+</html>

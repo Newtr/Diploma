@@ -1,0 +1,20 @@
+{
+  "Version": 1,
+  "Hash": "5xbhvFLXEniTANWYhMCj8DqauxcsGqABVj2LkvEH5DM=",
+  "Source": "EvacProject",
+  "BasePath": "_content/EvacProject",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "EvacProject\\wwwroot",
+      "Source": "EvacProject",
+      "ContentRoot": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\",
+      "BasePath": "_content/EvacProject",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [],
+  "Endpoints": []
+}

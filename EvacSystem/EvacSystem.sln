@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvacProject", "EvacProject\EvacProject.csproj", "{9DA6A59C-D8F0-4FF4-AD5A-1BC85D82B791}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9DA6A59C-D8F0-4FF4-AD5A-1BC85D82B791}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DA6A59C-D8F0-4FF4-AD5A-1BC85D82B791}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DA6A59C-D8F0-4FF4-AD5A-1BC85D82B791}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DA6A59C-D8F0-4FF4-AD5A-1BC85D82B791}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
