@@ -1,0 +1,438 @@
+:root {
+  --primary-color: #4361ee;
+  --primary-dark: #3a0ca3;
+  --secondary-color: #f72585;
+  --success-color: #4cc9f0;
+  --warning-color: #f8961e;
+  --danger-color: #ef233c;
+  --light-color: #f8f9fa;
+  --dark-color: #212529;
+  --gray-light: #e9ecef;
+  --gray-medium: #adb5bd;
+  --gray-dark: #495057;
+  
+  --border-radius: 12px;
+  --box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  line-height: 1.6;
+  color: var(--dark-color);
+  background-color: var(--light-color);
+  padding: 2rem;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  overflow: hidden;
+  padding: 2rem;
+}
+
+h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 1.5rem;
+  text-align: center;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+h1::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  border-radius: 2px;
+}
+
+.controls {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+#blockModeBtn {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+#blockModeBtn:hover {
+  background-color: var(--primary-dark);
+}
+
+#blockModeBtn.active {
+  background-color: var(--danger-color);
+}
+
+#clearBlockedBtn {
+  background-color: var(--gray-light);
+  color: var(--dark-color);
+}
+
+#clearBlockedBtn:hover {
+  background-color: var(--gray-medium);
+}
+
+#findPathBtn {
+  background-color: var(--success-color);
+  color: white;
+}
+
+#findPathBtn:hover {
+  background-color: #3aa8d8;
+}
+
+#clearPathBtn {
+  background-color: var(--warning-color);
+  color: white;
+}
+
+#clearPathBtn:hover {
+  background-color: #e07c0c;
+}
+
+#mapContainer {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  background-color: var(--light-color);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--gray-light);
+}
+
+#infoPanel {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background-color: rgba(76, 201, 240, 0.1);
+  border-radius: var(--border-radius);
+  border-left: 4px solid var(--success-color);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: var(--transition);
+  font-size: 1rem;
+  color: var(--dark-color);
+}
+
+#infoPanel.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Элементы здания */
+.wall {
+  position: absolute;
+  background-color: var(--dark-color);
+  z-index: 1;
+}
+
+.room {
+  position: absolute;
+  background-color: rgba(67, 97, 238, 0.1);
+  border: 2px solid var(--primary-color);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: var(--transition);
+  z-index: 2;
+}
+
+.room:hover {
+  background-color: rgba(67, 97, 238, 0.2);
+}
+
+.room.selected {
+  background-color: rgba(76, 201, 240, 0.3);
+  border-color: var(--success-color);
+  box-shadow: 0 0 0 3px rgba(76, 201, 240, 0.3);
+}
+
+.room-label {
+  position: absolute;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--primary-dark);
+  pointer-events: none;
+  z-index: 3;
+  padding: 0.2rem 0.4rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 4px;
+}
+
+.corridor {
+  position: absolute;
+  background-color: rgba(233, 236, 239, 0.7);
+  border: 1px dashed var(--gray-medium);
+  cursor: pointer;
+  transition: var(--transition);
+  z-index: 1;
+}
+
+.corridor:hover {
+  background-color: rgba(233, 236, 239, 0.9);
+}
+
+.corridor.blocked {
+  background-color: rgba(239, 35, 60, 0.1);
+  border-color: var(--danger-color);
+  border-style: solid;
+}
+
+.corridor-label {
+  position: absolute;
+  font-size: 0.75rem;
+  color: var(--gray-dark);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.cross {
+  position: absolute;
+  background-color: rgba(233, 236, 239, 0.9);
+  border: 1px dashed var(--gray-medium);
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.cross.blocked {
+  background-color: rgba(239, 35, 60, 0.2);
+  border-color: var(--danger-color);
+}
+
+.cross-label {
+  position: absolute;
+  font-size: 0.7rem;
+  font-weight: bold;
+  color: var(--warning-color);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.stairs {
+  position: absolute;
+  background-color: rgba(248, 150, 30, 0.15);
+  border: 1px solid var(--warning-color);
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.stairs-step {
+  position: absolute;
+  background-color: var(--warning-color);
+  opacity: 0.7;
+}
+
+.stairs-label {
+  position: absolute;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--warning-color);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.exit {
+  position: absolute;
+  background-color: rgba(76, 201, 240, 0.2);
+  border: 2px solid var(--success-color);
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 3;
+  transition: var(--transition);
+}
+
+.exit:hover {
+  background-color: rgba(76, 201, 240, 0.3);
+}
+
+.exit-label {
+  position: absolute;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: var(--success-color);
+  pointer-events: none;
+  z-index: 4;
+  text-shadow: 0 0 2px white;
+}
+
+/* Стили для пути эвакуации */
+.path-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.path-overlay path {
+  stroke: var(--secondary-color);
+  stroke-width: 4px;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: drawPath 2s ease-out forwards;
+}
+
+.path-overlay .end-arrow {
+  stroke: var(--danger-color);
+  stroke-width: 3px;
+  marker-end: url(#arrowhead);
+  opacity: 0;
+  animation: 
+    fadeInArrow 0.5s ease-out 1.5s forwards,
+    moveArrow 1s ease-in-out 2s infinite alternate;
+}
+
+.path-overlay circle {
+  stroke-width: 2px;
+  stroke: white;
+  opacity: 0;
+  animation: fadeInPoint 0.5s ease-out forwards;
+}
+
+.path-overlay circle.start-point {
+  fill: var(--success-color);
+  r: 8;
+  animation-delay: 0.5s;
+}
+
+.path-overlay circle.end-point {
+  fill: var(--danger-color);
+  r: 8;
+  animation-delay: 1s;
+}
+
+.path-overlay circle.mid-point {
+  fill: var(--warning-color);
+  r: 6;
+  animation-delay: 0.7s;
+}
+
+.path-overlay circle.cross-point {
+  fill: var(--primary-color);
+  r: 6;
+  animation-delay: 0.7s;
+}
+
+/* Анимации */
+@keyframes drawPath {
+  to {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInArrow {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+
+@keyframes fadeInPoint {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Маркер стрелки */
+#arrowhead polygon {
+  fill: var(--danger-color); /* Просто цвет без анимации */
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  body {
+    padding: 1rem;
+  }
+  
+  .container {
+    padding: 1rem;
+  }
+  
+  h1 {
+    font-size: 1.8rem;
+  }
+  
+  button {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  #mapContainer {
+    height: 400px;
+  }
+  
+  .path-overlay path {
+    stroke-width: 3px;
+  }
+  
+  .path-overlay .end-arrow {
+    stroke-width: 2px;
+  }
+  
+  .path-overlay circle {
+    r: 5;
+  }
+  
+  .path-overlay circle.start-point,
+  .path-overlay circle.end-point {
+    r: 6;
+  }
+}

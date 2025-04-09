@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>План эвакуации при ЧС</title>
+    <link rel="stylesheet" href="css/styles1.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-exclamation-triangle"></i> План эвакуации при чрезвычайных ситуациях</h1>
+            <p class="subtitle">Важная информация по эвакуации и безопасности</p>
+        </header>
+
+        <div class="main-content">
+            <div class="info-panel">    
+                <div class="tips">
+                    <h2><i class="fas fa-lightbulb"></i> Важные советы при эвакуации:</h2>
+                    <div class="progress-bar">
+                        <div class="progress" id="readingProgress"></div>
+                        <span id="progressText">0/8 прочитано</span>
+                    </div>
+                    <ul id="evacuationTips">
+                    </ul>
+                </div>
+
+                <div class="emergency-contacts">
+                    <h2><i class="fas fa-phone-alt"></i> Экстренные службы:</h2>
+                    <ul>
+                        <li><i class="fas fa-fire"></i> Пожарная служба: 101</li>
+                        <li><i class="fas fa-ambulance"></i> Скорая помощь: 103</li>
+                        <li><i class="fas fa-shield-alt"></i> МЧС: 112</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="interactive-section">
+                <div class="quiz-section">
+                    <h2><i class="fas fa-question-circle"></i> Проверьте свои знания</h2>
+                    <div class="quiz-container" id="quizContainer">
+                    </div>
+                    <div id="quizResult" class="quiz-result" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+        <a href="plan.html" class="nav-button" id="toPlanBtn">
+            <i class="fas fa-map-marked-alt"></i> Посмотреть план эвакуации
+        </a>
+    </div>
+    <div class="notification" id="notification"></div>
+    <script>
+
+        document.querySelectorAll('.nav-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.body.classList.add('fade-out');
+                
+                setTimeout(() => {
+                    window.location.href = this.href;
+                }, 500);
+            });
+        });
+    </script>
+    <script src="js/script.js"></script>
+</body>
+</html>
