@@ -21,6 +21,8 @@ builder.Services.AddSingleton<ITelegramBotClient>(provider =>
 });
 
 builder.Services.AddHostedService<TelegramBotService>();
+builder.Services.AddHttpClient<WeatherService>();
+builder.Services.AddSingleton<WeatherService>();
 builder.Services.AddSingleton<ITelegramBotService, TelegramBotService>(provider =>
 {
     var service = provider.GetRequiredService<TelegramBotService>();

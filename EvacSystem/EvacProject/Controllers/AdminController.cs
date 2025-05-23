@@ -1,13 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 using EvacProject.GENERAL.Data;
+using EvacProject.Services;
+using Microsoft.Extensions.Logging;
+using System.Linq;
 
 namespace EvacProject.Controllers
 {
     public class AdminController : Controller
     {
         private readonly ApplicationDbContext _dbContext;
-        private readonly ITelegramBotService _botService; 
+        private readonly ITelegramBotService _botService;
         private readonly ILogger<AdminController> _logger;
 
         public AdminController(
@@ -80,6 +84,62 @@ namespace EvacProject.Controllers
                 _logger.LogError(ex, "Error in TestBot");
                 return Content($"Ошибка: {ex.Message}");
             }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> HelpMessages()
+        {
+            _logger.LogInformation("AdminController: HelpMessages called");
+            var messages = await _dbContext.HelpMessages
+                .OrderByDescending(m => m.SentAt)
+                .ToListAsync();
+            return View(messages);
+        }
+        [HttpPost]
+        public async Task<IActionResult> ClearHelpMessages()
+        {
+            _logger.LogInformation("AdminController: ClearHelpMessages called, Session AdminAuthenticated={Session}, Method={Method}",
+                HttpContext.Session.GetString("AdminAuthenticated"), HttpContext.Request.Method);
+            try
+            {
+                // Проверка сессии
+                if (HttpContext.Session.GetString("AdminAuthenticated") != "true")
+                {
+                    _logger.LogWarning("ClearHelpMessages: Session invalid, redirecting to Login");
+                    return RedirectToAction("Login");
+                }
+
+                // Проверка подключения к базе данных
+                if (!await _dbContext.Database.CanConnectAsync())
+                {
+                    _logger.LogError("ClearHelpMessages: Database connection failed");
+                    TempData["Error"] = "Ошибка: нет соединения с базой данных.";
+                    return RedirectToAction("HelpMessages");
+                }
+
+                var messages = await _dbContext.HelpMessages.ToListAsync();
+                _logger.LogInformation("ClearHelpMessages: Found {Count} help messages to remove", messages.Count);
+
+                if (messages.Any())
+                {
+                    _dbContext.HelpMessages.RemoveRange(messages);
+                    int changes = await _dbContext.SaveChangesAsync();
+                    _logger.LogInformation("ClearHelpMessages: Removed {Count} help messages, changes saved: {Changes}", messages.Count, changes);
+                    TempData["Message"] = $"Все сообщения ({messages.Count}) очищены.";
+                }
+                else
+                {
+                    _logger.LogInformation("ClearHelpMessages: No help messages found to remove");
+                    TempData["Message"] = "Нет сообщений для очистки.";
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "ClearHelpMessages: Error clearing help messages");
+                TempData["Error"] = $"Ошибка при очистке сообщений: {ex.Message}";
+            }
+            _logger.LogInformation("ClearHelpMessages: Redirecting to HelpMessages");
+            return RedirectToAction("HelpMessages");
         }
     }
 }

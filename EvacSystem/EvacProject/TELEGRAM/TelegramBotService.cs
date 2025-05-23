@@ -18,11 +18,14 @@ namespace EvacProject.Services
         private readonly Dictionary<long, string> _userStates = new();
         private readonly Dictionary<long, string> _userRoles = new();
         private readonly Dictionary<long, UserTestState> _userTestStates = new();
+        private readonly Dictionary<long, string> _pendingHelpMessages = new();
+        private readonly WeatherService _weatherService;
 
         public TelegramBotService(
             IConfiguration configuration,
             IServiceScopeFactory scopeFactory,
             IWebHostEnvironment environment,
+            WeatherService weatherService,
             ILogger<TelegramBotService> logger,
             ITelegramBotClient botClient)
         {
@@ -32,6 +35,7 @@ namespace EvacProject.Services
             {
                 _botClient = botClient ?? new TelegramBotClient("7739045967:AAH9D4tGz7v8H7vZC67b3yI6D3diwDy5i0U");
                 _scopeFactory = scopeFactory;
+                _weatherService = weatherService;
                 _environment = environment;
             }
             catch (Exception ex)
@@ -113,10 +117,10 @@ namespace EvacProject.Services
             try
             {
                 _logger.LogInformation($"Received update: Type={update.Type}, ChatId={update.Message?.Chat.Id}, Text={update.Message?.Text}");
-                if (update.Type == UpdateType.Message && update.Message?.Text != null)
+                if (update.Type == UpdateType.Message && (update.Message?.Text != null || update.Message?.Location != null))
                 {
                     var chatId = update.Message.Chat.Id;
-                    var messageText = update.Message.Text.ToLower();
+                    var messageText = update.Message.Text?.ToLower() ?? string.Empty;
 
                     using var scope = _scopeFactory.CreateScope();
                     var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
@@ -128,7 +132,7 @@ namespace EvacProject.Services
 
                     if (student != null || admin != null)
                     {
-                        await HandleAuthenticatedUser(chatId, messageText, student, admin, dbContext, cancellationToken);
+                        await HandleAuthenticatedUser(chatId, messageText, student, admin, dbContext, cancellationToken, update);
                     }
                     else
                     {
@@ -142,32 +146,208 @@ namespace EvacProject.Services
             }
         }
 
-        private async Task HandleAuthenticatedUser(long chatId, string messageText, Student student, Admin admin, ApplicationDbContext dbContext, CancellationToken cancellationToken)
+        private async Task HandleAuthenticatedUser(long chatId, string messageText, Student student, Admin admin, ApplicationDbContext dbContext, CancellationToken cancellationToken, Update update)
         {
             try
             {
-                if (messageText == "/logout")
+                if (messageText.StartsWith("/help"))
                 {
-                    if (student != null)
+                    if (student == null)
                     {
-                        student.TelegramChatId = null;
+                        await _botClient.SendMessage(
+                            chatId: chatId,
+                            text: "Команда /help доступна только студентам. Пожалуйста, авторизуйтесь как студент.",
+                            cancellationToken: cancellationToken);
+                        return;
                     }
-                    else if (admin != null)
+
+                    try
                     {
-                        admin.TelegramChatId = null;
+                        string helpMessage = messageText.Length > 5 ? messageText.Substring(5).Trim() : string.Empty;
+                        if (string.IsNullOrWhiteSpace(helpMessage))
+                        {
+                            await _botClient.SendMessage(
+                                chatId: chatId,
+                                text: "Пожалуйста, укажите сообщение после команды /help. Например: /help Нужна помощь на этаже 3",
+                                cancellationToken: cancellationToken);
+                            return;
+                        }
+
+                        _pendingHelpMessages[chatId] = helpMessage;
+                        _userStates[chatId] = "waiting_for_location";
+
+                        await _botClient.SendMessage(
+                            chatId: chatId,
+                            text: "Пожалуйста, отправьте вашу геолокацию или напишите 'без геолокации' для продолжения.",
+                            cancellationToken: cancellationToken);
+                        _logger.LogInformation($"Waiting for location for help message: Student={student.FirstName} {student.LastName}, Message={helpMessage}, ChatId={chatId}");
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError(ex, "Error processing /help command");
+                        await _botClient.SendMessage(
+                            chatId: chatId,
+                            text: "Произошла ошибка при обработке команды /help. Попробуйте позже.",
+                            cancellationToken: cancellationToken);
+                    }
+                    return;
+                }
+
+                if (_userStates.ContainsKey(chatId) && _userStates[chatId] == "waiting_for_location")
+                {
+                    try
+                    {
+                        if (!_pendingHelpMessages.ContainsKey(chatId))
+                        {
+                            _userStates.Remove(chatId);
+                            await _botClient.SendMessage(
+                                chatId: chatId,
+                                text: "Сессия /help истекла. Пожалуйста, отправьте команду /help заново.",
+                                cancellationToken: cancellationToken);
+                            return;
+                        }
+
+                        var helpMessage = _pendingHelpMessages[chatId];
+                        var helpMsg = new HelpMessage
+                        {
+                            StudentFullName = $"{student.FirstName} {student.LastName}",
+                            SentAt = DateTime.UtcNow,
+                            MessageText = helpMessage,
+                            TelegramChatId = chatId.ToString()
+                        };
+
+                        if (update.Message?.Location != null)
+                        {
+                            helpMsg.Latitude = update.Message.Location.Latitude;
+                            helpMsg.Longitude = update.Message.Location.Longitude;
+                            _logger.LogInformation($"Received location: Latitude={helpMsg.Latitude}, Longitude={helpMsg.Longitude}");
+                        }
+                        else if (messageText == "без геолокации")
+                        {
+                            _logger.LogInformation("User skipped location");
+                        }
+                        else
+                        {
+                            await _botClient.SendMessage(
+                                chatId: chatId,
+                                text: "Пожалуйста, отправьте геолокацию или напишите 'без геолокации'.",
+                                cancellationToken: cancellationToken);
+                            return;
+                        }
+
+                        dbContext.HelpMessages.Add(helpMsg);
+                        await dbContext.SaveChangesAsync(cancellationToken);
+
+                        _userStates.Remove(chatId);
+                        _pendingHelpMessages.Remove(chatId);
+
+                        await _botClient.SendMessage(
+                            chatId: chatId,
+                            text: "Ваше сообщение отправлено администрации. Мы скоро свяжемся с вами.",
+                            cancellationToken: cancellationToken);
+                        _logger.LogInformation($"Help message saved: Student={helpMsg.StudentFullName}, Message={helpMsg.MessageText}, ChatId={chatId}");
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError(ex, "Error saving help message with location");
+                        await _botClient.SendMessage(
+                            chatId: chatId,
+                            text: "Произошла ошибка при сохранении сообщения. Попробуйте позже.",
+                            cancellationToken: cancellationToken);
+                        _userStates.Remove(chatId);
+                        _pendingHelpMessages.Remove(chatId);
+                    }
+                    return;
+                }
+
+                if (messageText.StartsWith("/danger"))
+                {
+                    if (student == null)
+                    {
+                        await _botClient.SendMessage(
+                            chatId: chatId,
+                            text: "Команда /danger доступна только студентам. Пожалуйста, авторизуйтесь как студент.",
+                            cancellationToken: cancellationToken);
+                        return;
                     }
 
-                    await dbContext.SaveChangesAsync(cancellationToken);
+                    try
+                    {
+                        var parts = messageText.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                        if (parts.Length < 2)
+                        {
+                            await _botClient.SendMessage(
+                                chatId: chatId,
+                                text: "Введите название региона после команды /danger, например: /danger Минск",
+                                cancellationToken: cancellationToken);
+                            return;
+                        }
 
-                    _userStates.Remove(chatId);
-                    _userRoles.Remove(chatId);
-                    _userTestStates.Remove(chatId);
+                        var region = string.Join(" ", parts[1..]);
+                        _logger.LogInformation($"Handling /danger for region: {region}, ChatId={chatId}");
 
-                    await _botClient.SendMessage(
-                        chatId: chatId,
-                        text: "Вы вышли из системы. Пожалуйста, авторизуйтесь снова: укажите, кто вы (студент или преподаватель).",
-                        cancellationToken: cancellationToken);
-                    _userStates[chatId] = "waiting_for_role";
+                        var weatherData = await _weatherService.GetWeatherByCity(region);
+                        var dangerLevel = _weatherService.DetermineDangerLevel(weatherData);
+                        var responseText = $"Погода в {region}:\n" +
+                                           $"Температура: {(double)weatherData["main"]["temp"]:F1}°С,\n" +
+                                           $"Ветер: {(double)weatherData["wind"]["speed"]:F1} м/с,\n" +
+                                           $"Уровень опасности: {dangerLevel}";
+
+                        await _botClient.SendMessage(
+                            chatId: chatId,
+                            text: responseText,
+                            cancellationToken: cancellationToken);
+                        _logger.LogInformation($"Sent weather data for region: {region}, DangerLevel={dangerLevel}, ChatId={chatId}");
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError(ex, $"Error handling /danger for region, ChatId={chatId}");
+                        await _botClient.SendMessage(
+                            chatId: chatId,
+                            text: "Ошибка: Не удалось получить данные о погоде. Проверьте название региона.",
+                            cancellationToken: cancellationToken);
+                    }
+                    return;
+                }
+
+                // Обработка геолокации для /danger (без команды)
+                if (update.Message?.Location != null)
+                {
+                    if (student == null)
+                    {
+                        await _botClient.SendMessage(
+                            chatId: chatId,
+                            text: "Отправка геолокации для /danger доступна только студентам. Пожалуйста, авторизуйтесь как студент.",
+                            cancellationToken: cancellationToken);
+                        return;
+                    }
+
+                    try
+                    {
+                        var location = update.Message.Location;
+                        _logger.LogInformation($"Handling /danger with location: Lat={location.Latitude}, Lon={location.Longitude}, ChatId={chatId}");
+
+                        var weatherData = await _weatherService.GetWeatherByCoordinates(location.Latitude, location.Longitude);
+                        var dangerLevel = _weatherService.DetermineDangerLevel(weatherData);
+                        var responseText = "Погода по координатам:\n" +
+                                           $"Температура: {(double)weatherData["main"]["temp"]:F1}°С,\n" +
+                                           $"Ветер: {(double)weatherData["wind"]["speed"]:F1} м/с,\n" +
+                                           $"Уровень опасности: {dangerLevel}";
+
+                        await _botClient.SendMessage(
+                            chatId: chatId,
+                            text: responseText,
+                            cancellationToken: cancellationToken);
+                        _logger.LogInformation($"Sent weather data for coordinates: Lat={location.Latitude}, Lon={location.Longitude}, DangerLevel={dangerLevel}, ChatId={chatId}");
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError(ex, $"Error handling /danger for coordinates, ChatId={chatId}");
+                        await _botClient.SendMessage(
+                            chatId: chatId,
+                            text: "Ошибка при получении данных о погоде.",
+                            cancellationToken: cancellationToken);
+                    }
                     return;
                 }
 
@@ -413,7 +593,7 @@ namespace EvacProject.Services
 
                 await _botClient.SendMessage(
                     chatId: chatId,
-                    text: "Команда не распознана. Попробуйте /history, /kit, /test или /logout.",
+                    text: "Команда не распознана. Попробуйте /help, /danger, /history, /kit, /test или /logout.",
                     cancellationToken: cancellationToken);
             }
             catch (Exception ex)

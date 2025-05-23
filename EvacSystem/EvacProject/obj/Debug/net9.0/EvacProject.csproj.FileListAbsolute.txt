@@ -133,3 +133,4 @@ C:\Diploma\EvacSystem\EvacProject\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysi
 C:\Diploma\EvacSystem\EvacProject\bin\Debug\net9.0\Info.json
 C:\Diploma\EvacSystem\EvacProject\bin\Debug\net9.0\Telegram.Bot.dll
 C:\Diploma\EvacSystem\EvacProject\obj\Debug\net9.0\EvacProject.MvcApplicationPartsAssemblyInfo.cs
+C:\Diploma\EvacSystem\EvacProject\bin\Debug\net9.0\Newtonsoft.Json.dll

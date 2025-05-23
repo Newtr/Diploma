@@ -14,6 +14,7 @@ namespace EvacProject.GENERAL.Data
         public DbSet<FormOfStudy> FormsOfStudy { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<AcademicDegree> AcademicDegrees { get; set; }
+        public DbSet<HelpMessage> HelpMessages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
