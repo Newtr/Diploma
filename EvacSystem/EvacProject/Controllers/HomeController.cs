@@ -1,11 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace EvacProject.Controllers;
-
-public class HomeController : Controller
+namespace EvacProject.Controllers
 {
-    public IActionResult CreatePage()
+    public class HomeController : Controller
     {
-        return View("HomePage");
+        private readonly ILogger<HomeController> _logger;
+
+        public HomeController(ILogger<HomeController> logger)
+        {
+            _logger = logger;
+        }
+
+        public IActionResult Index()
+        {
+            _logger.LogInformation("HomeController: Index called");
+            return Content("User Portal: Добро пожаловать в БГТУ");
+        }
     }
 }

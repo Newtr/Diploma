@@ -1,0 +1,16 @@
+﻿version: "3.9" 
+services:
+  postgres:
+    image: postgres:15              
+    restart: always
+    environment:
+      POSTGRES_USER: Roman           
+      POSTGRES_PASSWORD: Roman123 
+      POSTGRES_DB: EvacuationSystem        
+    ports:
+      - "5432:5432"                 
+    volumes:
+      - pgdata:/var/lib/postgresql/data  
+
+volumes:
+  pgdata:

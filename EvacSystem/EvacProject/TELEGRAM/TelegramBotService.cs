@@ -1,0 +1,590 @@
+﻿using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
+using Telegram.Bot;
+using Telegram.Bot.Polling;
+using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
+using EvacProject.GENERAL.Data;
+using EvacProject.GENERAL.Entity;
+
+namespace EvacProject.Services
+{
+    public class TelegramBotService : IHostedService, ITelegramBotService
+    {
+        private readonly ITelegramBotClient _botClient;
+        private readonly IServiceScopeFactory _scopeFactory;
+        private readonly IWebHostEnvironment _environment;
+        private readonly ILogger<TelegramBotService> _logger;
+        private readonly Dictionary<long, string> _userStates = new();
+        private readonly Dictionary<long, string> _userRoles = new();
+        private readonly Dictionary<long, UserTestState> _userTestStates = new();
+
+        public TelegramBotService(
+            IConfiguration configuration,
+            IServiceScopeFactory scopeFactory,
+            IWebHostEnvironment environment,
+            ILogger<TelegramBotService> logger,
+            ITelegramBotClient botClient)
+        {
+            _logger = logger;
+            _logger.LogInformation("TelegramBotService: Constructor called");
+            try
+            {
+                _botClient = botClient ?? new TelegramBotClient("7739045967:AAH9D4tGz7v8H7vZC67b3yI6D3diwDy5i0U");
+                _scopeFactory = scopeFactory;
+                _environment = environment;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to initialize TelegramBotService");
+                throw;
+            }
+        }
+
+        public async Task StartAsync(CancellationToken cancellationToken)
+        {
+            _logger.LogInformation("TelegramBotService: StartAsync called");
+            try
+            {
+                var httpClient = new HttpClient();
+                var response = await httpClient.GetAsync("https://api.telegram.org", cancellationToken);
+                _logger.LogInformation($"Telegram API reachability: {response.StatusCode}");
+
+                var botInfo = await _botClient.GetMe(cancellationToken);
+                _logger.LogInformation($"Bot started: @{botInfo.Username}");
+
+                var receiverOptions = new ReceiverOptions
+                {
+                    AllowedUpdates = new[] { UpdateType.Message }
+                };
+
+                _botClient.StartReceiving(
+                    updateHandler: HandleUpdateAsync,
+                    errorHandler: HandleErrorAsync,
+                    receiverOptions: receiverOptions,
+                    cancellationToken: cancellationToken);
+
+                _logger.LogInformation("Telegram bot polling started");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to start Telegram bot");
+                throw;
+            }
+        }
+
+        public async Task StopAsync(CancellationToken cancellationToken)
+        {
+            _logger.LogInformation("TelegramBotService: StopAsync called");
+            await Task.CompletedTask;
+        }
+
+        public async Task SendMessageToAllStudents(string message)
+        {
+            _logger.LogInformation("SendMessageToAllStudents: Starting to send message to all students");
+            using var scope = _scopeFactory.CreateScope();
+            var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            var studentChatIds = await dbContext.Students
+                .Where(s => s.TelegramChatId != null)
+                .Select(s => s.TelegramChatId)
+                .ToListAsync();
+
+            _logger.LogInformation($"Found {studentChatIds.Count} students with TelegramChatId");
+            foreach (var chatId in studentChatIds)
+            {
+                try
+                {
+                    await _botClient.SendMessage(
+                        chatId: chatId,
+                        text: message,
+                        cancellationToken: CancellationToken.None);
+                    _logger.LogInformation($"Message sent to chat {chatId}");
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, $"Failed to send message to chat {chatId}");
+                }
+            }
+            _logger.LogInformation("SendMessageToAllStudents: Completed");
+        }
+
+        private async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
+        {
+            try
+            {
+                _logger.LogInformation($"Received update: Type={update.Type}, ChatId={update.Message?.Chat.Id}, Text={update.Message?.Text}");
+                if (update.Type == UpdateType.Message && update.Message?.Text != null)
+                {
+                    var chatId = update.Message.Chat.Id;
+                    var messageText = update.Message.Text.ToLower();
+
+                    using var scope = _scopeFactory.CreateScope();
+                    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+                    var student = await dbContext.Students
+                        .FirstOrDefaultAsync(s => s.TelegramChatId != null && s.TelegramChatId == chatId.ToString(), cancellationToken);
+                    var admin = await dbContext.Admins
+                        .FirstOrDefaultAsync(a => a.TelegramChatId != null && a.TelegramChatId == chatId.ToString(), cancellationToken);
+
+                    if (student != null || admin != null)
+                    {
+                        await HandleAuthenticatedUser(chatId, messageText, student, admin, dbContext, cancellationToken);
+                    }
+                    else
+                    {
+                        await HandleUnauthenticatedUser(chatId, messageText, dbContext, cancellationToken);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error handling Telegram update");
+            }
+        }
+
+        private async Task HandleAuthenticatedUser(long chatId, string messageText, Student student, Admin admin, ApplicationDbContext dbContext, CancellationToken cancellationToken)
+        {
+            try
+            {
+                if (messageText == "/logout")
+                {
+                    if (student != null)
+                    {
+                        student.TelegramChatId = null;
+                    }
+                    else if (admin != null)
+                    {
+                        admin.TelegramChatId = null;
+                    }
+
+                    await dbContext.SaveChangesAsync(cancellationToken);
+
+                    _userStates.Remove(chatId);
+                    _userRoles.Remove(chatId);
+                    _userTestStates.Remove(chatId);
+
+                    await _botClient.SendMessage(
+                        chatId: chatId,
+                        text: "Вы вышли из системы. Пожалуйста, авторизуйтесь снова: укажите, кто вы (студент или преподаватель).",
+                        cancellationToken: cancellationToken);
+                    _userStates[chatId] = "waiting_for_role";
+                    return;
+                }
+
+                if (messageText == "/history")
+                {
+                    try
+                    {
+                        var filePath = Path.Combine(_environment.ContentRootPath, "Info.json");
+                        if (!System.IO.File.Exists(filePath))
+                        {
+                            await _botClient.SendMessage(
+                                chatId: chatId,
+                                text: "Ошибка: Файл Info.json не найден.",
+                                cancellationToken: cancellationToken);
+                            return;
+                        }
+
+                        var jsonContent = await System.IO.File.ReadAllTextAsync(filePath, cancellationToken);
+                        var historyData = JsonSerializer.Deserialize<HistoryData>(jsonContent, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+                        if (historyData?.History == null || !historyData.History.Any())
+                        {
+                            await _botClient.SendMessage(
+                                chatId: chatId,
+                                text: "История событий пуста.",
+                                cancellationToken: cancellationToken);
+                            return;
+                        }
+
+                        var response = "История событий:\n" + string.Join("\n", historyData.History.Select(kvp => $"{kvp.Key} - {kvp.Value.Количество}"));
+                        await _botClient.SendMessage(
+                            chatId: chatId,
+                            text: response,
+                            cancellationToken: cancellationToken);
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError(ex, "Error processing /history command");
+                        await _botClient.SendMessage(
+                            chatId: chatId,
+                            text: "Произошла ошибка при получении истории.",
+                            cancellationToken: cancellationToken);
+                    }
+                    return;
+                }
+
+                if (messageText == "/kit")
+                {
+                    try
+                    {
+                        var filePath = Path.Combine(_environment.ContentRootPath, "Info.json");
+                        if (!System.IO.File.Exists(filePath))
+                        {
+                            await _botClient.SendMessage(
+                                chatId: chatId,
+                                text: "Ошибка: Файл Info.json не найден.",
+                                cancellationToken: cancellationToken);
+                            return;
+                        }
+
+                        var jsonContent = await System.IO.File.ReadAllTextAsync(filePath, cancellationToken);
+                        var kitData = JsonSerializer.Deserialize<KitData>(jsonContent, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+                        if (kitData?.Эвакуационный_рюкзак == null || !kitData.Эвакуационный_рюкзак.Any())
+                        {
+                            await _botClient.SendMessage(
+                                chatId: chatId,
+                                text: "Список предметов эвакуационного рюкзака пуст.",
+                                cancellationToken: cancellationToken);
+                            return;
+                        }
+
+                        var items = string.Join("\n", kitData.Эвакуационный_рюкзак.Select(item => $"- {item.Название}: {item.Описание}"));
+                        var response = "Ваш базовый эвакуационный рюкзак должен содержать:\nПредметы:\n" + items;
+
+                        await _botClient.SendMessage(
+                            chatId: chatId,
+                            text: response,
+                            cancellationToken: cancellationToken);
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError(ex, "Error processing /kit command");
+                        await _botClient.SendMessage(
+                            chatId: chatId,
+                            text: "Произошла ошибка при получении списка предметов.",
+                            cancellationToken: cancellationToken);
+                    }
+                    return;
+                }
+
+                if (messageText == "/test")
+                {
+                    try
+                    {
+                        var filePath = Path.Combine(_environment.ContentRootPath, "Info.json");
+                        if (!System.IO.File.Exists(filePath))
+                        {
+                            await _botClient.SendMessage(
+                                chatId: chatId,
+                                text: "Ошибка: Файл Info.json не найден.",
+                                cancellationToken: cancellationToken);
+                            return;
+                        }
+
+                        var jsonContent = await System.IO.File.ReadAllTextAsync(filePath, cancellationToken);
+                        var testData = JsonSerializer.Deserialize<TestData>(jsonContent, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+                        if (testData?.Вопросы == null || !testData.Вопросы.Any())
+                        {
+                            await _botClient.SendMessage(
+                                chatId: chatId,
+                                text: "Вопросы для теста отсутствуют.",
+                                cancellationToken: cancellationToken);
+                            return;
+                        }
+
+                        _userTestStates[chatId] = new UserTestState { IsTesting = true, CurrentQuestionIndex = 0, CorrectAnswers = 0 };
+                        _userStates[chatId] = "testing";
+
+                        var question = testData.Вопросы[0];
+                        var response = $"Вопрос 1:\n{question.Вопрос}\n" +
+                                       $"1. {question.Варианты[0]}\n" +
+                                       $"2. {question.Варианты[1]}\n" +
+                                       $"3. {question.Варианты[2]}\n" +
+                                       "Введите номер ответа (1, 2 или 3):";
+
+                        await _botClient.SendMessage(
+                            chatId: chatId,
+                            text: response,
+                            cancellationToken: cancellationToken);
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError(ex, "Error processing /test command");
+                        await _botClient.SendMessage(
+                            chatId: chatId,
+                            text: "Произошла ошибка при запуске теста.",
+                            cancellationToken: cancellationToken);
+                    }
+                    return;
+                }
+
+                if (_userStates.ContainsKey(chatId) && _userStates[chatId] == "testing")
+                {
+                    try
+                    {
+                        if (!int.TryParse(messageText, out int answerIndex) || answerIndex < 1 || answerIndex > 3)
+                        {
+                            await _botClient.SendMessage(
+                                chatId: chatId,
+                                text: "Пожалуйста, введите корректный номер ответа (1, 2 или 3).",
+                                cancellationToken: cancellationToken);
+                            return;
+                        }
+
+                        var filePath = Path.Combine(_environment.ContentRootPath, "Info.json");
+                        if (!System.IO.File.Exists(filePath))
+                        {
+                            await _botClient.SendMessage(
+                                chatId: chatId,
+                                text: "Ошибка: Файл Info.json не найден.",
+                                cancellationToken: cancellationToken);
+                            return;
+                        }
+
+                        var jsonContent = await System.IO.File.ReadAllTextAsync(filePath, cancellationToken);
+                        var testData = JsonSerializer.Deserialize<TestData>(jsonContent, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+                        if (testData?.Вопросы == null || !testData.Вопросы.Any())
+                        {
+                            await _botClient.SendMessage(
+                                chatId: chatId,
+                                text: "Вопросы для теста отсутствуют.",
+                                cancellationToken: cancellationToken);
+                            return;
+                        }
+
+                        var testState = _userTestStates[chatId];
+                        var currentQuestion = testData.Вопросы[testState.CurrentQuestionIndex];
+
+                        var userAnswer = currentQuestion.Варианты[answerIndex - 1];
+                        bool isCorrect = userAnswer == currentQuestion.Правильный_ответ;
+                        if (isCorrect)
+                        {
+                            testState.CorrectAnswers++;
+                        }
+
+                        await _botClient.SendMessage(
+                            chatId: chatId,
+                            text: isCorrect ? "Правильно!" : $"Неправильно. Правильный ответ: {currentQuestion.Правильный_ответ}",
+                            cancellationToken: cancellationToken);
+
+                        testState.CurrentQuestionIndex++;
+                        if (testState.CurrentQuestionIndex < testData.Вопросы.Count)
+                        {
+                            var nextQuestion = testData.Вопросы[testState.CurrentQuestionIndex];
+                            var response = $"Вопрос {testState.CurrentQuestionIndex + 1}:\n{nextQuestion.Вопрос}\n" +
+                                           $"1. {nextQuestion.Варианты[0]}\n" +
+                                           $"2. {nextQuestion.Варианты[1]}\n" +
+                                           $"3. {nextQuestion.Варианты[2]}\n" +
+                                           "Введите номер ответа (1, 2 или 3):";
+
+                            await _botClient.SendMessage(
+                                chatId: chatId,
+                                text: response,
+                                cancellationToken: cancellationToken);
+                        }
+                        else
+                        {
+                            double scorePercentage = (double)testState.CorrectAnswers / testData.Вопросы.Count * 100;
+                            string readinessMessage = scorePercentage switch
+                            {
+                                >= 80 => "Отличная эвакуационная готовность! Вы хорошо подготовлены.",
+                                >= 50 => "Средняя эвакуационная готовность. Рекомендуем повторить правила безопасности.",
+                                _ => "Низкая эвакуационная готовность. Пожалуйста, изучите материалы по эвакуации."
+                            };
+
+                            var finalResponse = $"Тест завершен!\n" +
+                                               $"Правильных ответов: {testState.CorrectAnswers} из {testData.Вопросы.Count}\n" +
+                                               $"Ваш результат: {scorePercentage:F0}%\n" +
+                                               readinessMessage;
+
+                            await _botClient.SendMessage(
+                                chatId: chatId,
+                                text: finalResponse,
+                                cancellationToken: cancellationToken);
+
+                            _userTestStates.Remove(chatId);
+                            _userStates[chatId] = "authenticated";
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError(ex, "Error processing test answer");
+                        await _botClient.SendMessage(
+                            chatId: chatId,
+                            text: "Произошла ошибка при обработке ответа.",
+                            cancellationToken: cancellationToken);
+                    }
+                    return;
+                }
+
+                await _botClient.SendMessage(
+                    chatId: chatId,
+                    text: "Команда не распознана. Попробуйте /history, /kit, /test или /logout.",
+                    cancellationToken: cancellationToken);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error handling authenticated user: ChatId={chatId}, Message={messageText}");
+                await _botClient.SendMessage(
+                    chatId: chatId,
+                    text: "Произошла ошибка. Попробуйте позже.",
+                    cancellationToken: cancellationToken);
+            }
+        }
+
+        private async Task HandleUnauthenticatedUser(long chatId, string messageText, ApplicationDbContext dbContext, CancellationToken cancellationToken)
+        {
+            try
+            {
+                if (!_userStates.ContainsKey(chatId))
+                {
+                    _userStates[chatId] = "waiting_for_role";
+                    await _botClient.SendMessage(
+                        chatId: chatId,
+                        text: "Пожалуйста, укажите, кто вы: студент или преподаватель.",
+                        cancellationToken: cancellationToken);
+                    return;
+                }
+
+                switch (_userStates[chatId])
+                {
+                    case "waiting_for_role":
+                        if (messageText == "студент" || messageText == "преподаватель")
+                        {
+                            _userRoles[chatId] = messageText;
+                            _userStates[chatId] = messageText == "студент" ? "waiting_for_student_number" : "waiting_for_userid";
+                            await _botClient.SendMessage(
+                                chatId: chatId,
+                                text: $"Пожалуйста, введите ваш {(messageText == "студент" ? "номер студенческого билета" : "UserID")}.",
+                                cancellationToken: cancellationToken);
+                        }
+                        else
+                        {
+                            await _botClient.SendMessage(
+                                chatId: chatId,
+                                text: "Неверная роль. Укажите 'студент' или 'преподаватель'.",
+                                cancellationToken: cancellationToken);
+                        }
+                        break;
+
+                    case "waiting_for_student_number":
+                        var student = await dbContext.Students.FirstOrDefaultAsync(s => s.StudentNumber == messageText, cancellationToken);
+                        if (student != null)
+                        {
+                            var existingStudent = await dbContext.Students.FirstOrDefaultAsync(s => s.TelegramChatId == chatId.ToString(), cancellationToken);
+                            var existingAdmin = await dbContext.Admins.FirstOrDefaultAsync(a => a.TelegramChatId == chatId.ToString(), cancellationToken);
+                            if (existingStudent != null) existingStudent.TelegramChatId = null;
+                            if (existingAdmin != null) existingAdmin.TelegramChatId = null;
+
+                            student.TelegramChatId = chatId.ToString();
+                            await dbContext.SaveChangesAsync(cancellationToken);
+                            _userStates[chatId] = "authenticated";
+                            await _botClient.SendMessage(
+                                chatId: chatId,
+                                text: $"Вы вошли в систему как {student.FirstName} {student.LastName}.",
+                                cancellationToken: cancellationToken);
+                        }
+                        else
+                        {
+                            await _botClient.SendMessage(
+                                chatId: chatId,
+                                text: "Неверный номер студенческого билета. Попробуйте еще раз.",
+                                cancellationToken: cancellationToken);
+                        }
+                        break;
+
+                    case "waiting_for_userid":
+                        if (long.TryParse(messageText, out long userId))
+                        {
+                            var admin = await dbContext.Admins.FirstOrDefaultAsync(a => a.UserId == userId, cancellationToken);
+                            if (admin != null)
+                            {
+                                var existingStudent = await dbContext.Students.FirstOrDefaultAsync(s => s.TelegramChatId == chatId.ToString(), cancellationToken);
+                                var existingAdmin = await dbContext.Admins.FirstOrDefaultAsync(a => a.TelegramChatId == chatId.ToString(), cancellationToken);
+                                if (existingStudent != null) existingStudent.TelegramChatId = null;
+                                if (existingAdmin != null) existingAdmin.TelegramChatId = null;
+
+                                admin.TelegramChatId = chatId.ToString();
+                                await dbContext.SaveChangesAsync(cancellationToken);
+                                _userStates[chatId] = "authenticated";
+                                await _botClient.SendMessage(
+                                    chatId: chatId,
+                                    text: $"Вы вошли в систему как {admin.FirstName} {admin.LastName}.",
+                                    cancellationToken: cancellationToken);
+                            }
+                            else
+                            {
+                                await _botClient.SendMessage(
+                                    chatId: chatId,
+                                    text: "Неверный UserID. Попробуйте еще раз.",
+                                    cancellationToken: cancellationToken);
+                            }
+                        }
+                        else
+                        {
+                            await _botClient.SendMessage(
+                                chatId: chatId,
+                                text: "UserID должен быть числом. Попробуйте еще раз.",
+                                cancellationToken: cancellationToken);
+                        }
+                        break;
+
+                    default:
+                        await _botClient.SendMessage(
+                            chatId: chatId,
+                            text: "Пожалуйста, авторизуйтесь, чтобы использовать бота.",
+                            cancellationToken: cancellationToken);
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error handling unauthenticated user: ChatId={chatId}, Message={messageText}");
+                await _botClient.SendMessage(
+                    chatId: chatId,
+                    text: "Произошла ошибка. Попробуйте позже.",
+                    cancellationToken: cancellationToken);
+            }
+        }
+
+        private Task HandleErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
+        {
+            _logger.LogError(exception, "Telegram polling error");
+            return Task.CompletedTask;
+        }
+        
+        public class HistoryEvent
+        {
+            public string Количество { get; set; }
+        }
+
+        public class HistoryData
+        {
+            public Dictionary<string, HistoryEvent> History { get; set; }
+        }
+
+        public class KitItem
+        {
+            public string Название { get; set; }
+            public string Описание { get; set; }
+        }
+
+        public class KitData
+        {
+            public List<KitItem> Эвакуационный_рюкзак { get; set; }
+        }
+
+        public class TestQuestion
+        {
+            public string Вопрос { get; set; }
+            public List<string> Варианты { get; set; }
+            public string Правильный_ответ { get; set; }
+        }
+
+        public class TestData
+        {
+            public List<TestQuestion> Вопросы { get; set; }
+        }
+
+        public class UserTestState
+        {
+            public int CurrentQuestionIndex { get; set; } = 0;
+            public int CorrectAnswers { get; set; } = 0;
+            public bool IsTesting { get; set; } = false;
+        }
+    }
+}

@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Admin Login Page";
+}
+
+<h2>Admin Login Page</h2>
+<form method="post" action="/Admin/Authenticate">
+    <label for="userId">UserID:</label>
+    <input type="text" id="userId" name="userId" />
+    <button type="submit">Войти</button>
+</form>
+@if (ViewBag.Error != null)
+{
+    <p style="color:red">@ViewBag.Error</p>
+}
