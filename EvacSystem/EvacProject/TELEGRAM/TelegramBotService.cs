@@ -150,6 +150,31 @@ namespace EvacProject.Services
         {
             try
             {
+                if (messageText == "/logout")
+                {
+                    if (student != null)
+                    {
+                        student.TelegramChatId = null;
+                        await dbContext.SaveChangesAsync(cancellationToken);
+                    }
+                    else if (admin != null)
+                    {
+                        admin.TelegramChatId = null;
+                        await dbContext.SaveChangesAsync(cancellationToken);
+                    }
+
+                    _userStates.Remove(chatId);
+                    _pendingHelpMessages.Remove(chatId);
+                    _userTestStates.Remove(chatId);
+
+                    await _botClient.SendMessage(
+                        chatId: chatId,
+                        text: "Вы успешно вышли из системы.",
+                        cancellationToken: cancellationToken);
+                    _logger.LogInformation($"User logged out: ChatId={chatId}");
+                    return;
+                }
+                
                 if (messageText.StartsWith("/help"))
                 {
                     if (student == null)
@@ -346,6 +371,172 @@ namespace EvacProject.Services
                         await _botClient.SendMessage(
                             chatId: chatId,
                             text: "Ошибка при получении данных о погоде.",
+                            cancellationToken: cancellationToken);
+                    }
+                    return;
+                }
+                
+                if (messageText == "/subscribe")
+                {
+                    if (student == null)
+                    {
+                        await _botClient.SendMessage(
+                            chatId: chatId,
+                            text: "Команда /subscribe доступна только студентам. Пожалуйста, авторизуйтесь как студент.",
+                            cancellationToken: cancellationToken);
+                        return;
+                    }
+
+                    try
+                    {
+                        var filePath = Path.Combine(_environment.ContentRootPath, "subscribers.json");
+                        if (!System.IO.File.Exists(filePath))
+                        {
+                            await System.IO.File.WriteAllTextAsync(filePath, JsonSerializer.Serialize(new SubscribersData()), cancellationToken);
+                            _logger.LogInformation($"Created subscribers.json at {filePath}");
+                        }
+
+                        var jsonContent = await System.IO.File.ReadAllTextAsync(filePath, cancellationToken);
+                        var subscribersData = JsonSerializer.Deserialize<SubscribersData>(jsonContent, new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new SubscribersData();
+
+                        if (subscribersData.Subscribers.Any(s => s.TelegramChatId == chatId.ToString()))
+                        {
+                            await _botClient.SendMessage(
+                                chatId: chatId,
+                                text: "Вы уже подписаны на новостную рассылку.",
+                                cancellationToken: cancellationToken);
+                            return;
+                        }
+
+                        subscribersData.Subscribers.Add(new Subscriber
+                        {
+                            StudentNumber = student.StudentNumber,
+                            TelegramChatId = chatId.ToString()
+                        });
+
+                        await System.IO.File.WriteAllTextAsync(filePath, JsonSerializer.Serialize(subscribersData, new JsonSerializerOptions { WriteIndented = true }), cancellationToken);
+
+                        await _botClient.SendMessage(
+                            chatId: chatId,
+                            text: "Вы успешно подписаны на новостную рассылку! Новости будут приходить каждый день в 7:00.",
+                            cancellationToken: cancellationToken);
+                        _logger.LogInformation($"User subscribed to news: StudentNumber={student.StudentNumber}, ChatId={chatId}");
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError(ex, $"Error handling /subscribe, ChatId={chatId}");
+                        await _botClient.SendMessage(
+                            chatId: chatId,
+                            text: "Произошла ошибка при подписке. Попробуйте позже.",
+                            cancellationToken: cancellationToken);
+                    }
+                    return;
+                }
+
+                if (messageText == "/unsubscribe")
+                {
+                    if (student == null)
+                    {
+                        await _botClient.SendMessage(
+                            chatId: chatId,
+                            text: "Команда /unsubscribe доступна только студентам. Пожалуйста, авторизуйтесь как студент.",
+                            cancellationToken: cancellationToken);
+                        return;
+                    }
+
+                    try
+                    {
+                        var filePath = Path.Combine(_environment.ContentRootPath, "subscribers.json");
+                        if (!System.IO.File.Exists(filePath))
+                        {
+                            await _botClient.SendMessage(
+                                chatId: chatId,
+                                text: "Вы не подписаны на новостную рассылку.",
+                                cancellationToken: cancellationToken);
+                            return;
+                        }
+
+                        var jsonContent = await System.IO.File.ReadAllTextAsync(filePath, cancellationToken);
+                        var subscribersData = JsonSerializer.Deserialize<SubscribersData>(jsonContent, new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new SubscribersData();
+
+                        var subscriber = subscribersData.Subscribers.FirstOrDefault(s => s.TelegramChatId == chatId.ToString());
+                        if (subscriber == null)
+                        {
+                            await _botClient.SendMessage(
+                                chatId: chatId,
+                                text: "Вы не подписаны на новостную рассылку.",
+                                cancellationToken: cancellationToken);
+                            return;
+                        }
+
+                        subscribersData.Subscribers.Remove(subscriber);
+                        await System.IO.File.WriteAllTextAsync(filePath, JsonSerializer.Serialize(subscribersData, new JsonSerializerOptions { WriteIndented = true }), cancellationToken);
+
+                        await _botClient.SendMessage(
+                            chatId: chatId,
+                            text: "Вы успешно отписались от новостной рассылки.",
+                            cancellationToken: cancellationToken);
+                        _logger.LogInformation($"User unsubscribed from news: StudentNumber={student.StudentNumber}, ChatId={chatId}");
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError(ex, $"Error handling /unsubscribe, ChatId={chatId}");
+                        await _botClient.SendMessage(
+                            chatId: chatId,
+                            text: "Произошла ошибка при отписке. Попробуйте позже.",
+                            cancellationToken: cancellationToken);
+                    }
+                    return;
+                }
+
+                if (messageText == "/news")
+                {
+                    if (student == null)
+                    {
+                        await _botClient.SendMessage(
+                            chatId: chatId,
+                            text: "Команда /news доступна только студентам. Пожалуйста, авторизуйтесь как студент.",
+                            cancellationToken: cancellationToken);
+                        return;
+                    }
+
+                    try
+                    {
+                        var filePath = Path.Combine(_environment.ContentRootPath, "News.json");
+                        if (!System.IO.File.Exists(filePath))
+                        {
+                            await _botClient.SendMessage(
+                                chatId: chatId,
+                                text: "Ошибка: Файл новостей не найден.",
+                                cancellationToken: cancellationToken);
+                            return;
+                        }
+
+                        var jsonContent = await System.IO.File.ReadAllTextAsync(filePath, cancellationToken);
+                        var newsData = JsonSerializer.Deserialize<NewsData>(jsonContent, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+                        if (newsData?.News == null || !newsData.News.Any())
+                        {
+                            await _botClient.SendMessage(
+                                chatId: chatId,
+                                text: "Новости отсутствуют.",
+                                cancellationToken: cancellationToken);
+                            return;
+                        }
+
+                        var responseText = "Новости:\n" + string.Join("\n\n", newsData.News.Select(n => $"{n.Title}\n{n.Description}\nДата: {n.Date}"));
+                        await _botClient.SendMessage(
+                            chatId: chatId,
+                            text: responseText,
+                            cancellationToken: cancellationToken);
+                        _logger.LogInformation($"Sent news to user: ChatId={chatId}, NewsCount={newsData.News.Count}");
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError(ex, $"Error handling /news, ChatId={chatId}");
+                        await _botClient.SendMessage(
+                            chatId: chatId,
+                            text: "Ошибка: Не удалось получить новости.",
                             cancellationToken: cancellationToken);
                     }
                     return;
@@ -593,7 +784,7 @@ namespace EvacProject.Services
 
                 await _botClient.SendMessage(
                     chatId: chatId,
-                    text: "Команда не распознана. Попробуйте /help, /danger, /history, /kit, /test или /logout.",
+                    text: "Команда не распознана. Попробуйте /help, /danger, /subscribe, /unsubscribe, /news, /history, /kit, /test или /logout.",
                     cancellationToken: cancellationToken);
             }
             catch (Exception ex)

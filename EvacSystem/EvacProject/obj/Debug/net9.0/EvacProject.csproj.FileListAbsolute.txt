@@ -64,7 +64,6 @@ C:\Diploma\EvacSystem\EvacProject\bin\Debug\net9.0\System.Composition.Convention
 C:\Diploma\EvacSystem\EvacProject\bin\Debug\net9.0\System.Composition.Hosting.dll
 C:\Diploma\EvacSystem\EvacProject\bin\Debug\net9.0\System.Composition.Runtime.dll
 C:\Diploma\EvacSystem\EvacProject\bin\Debug\net9.0\System.Composition.TypedParts.dll
-C:\Diploma\EvacSystem\EvacProject\bin\Debug\net9.0\System.Text.Json.dll
 C:\Diploma\EvacSystem\EvacProject\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.resources.dll
 C:\Diploma\EvacSystem\EvacProject\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.resources.dll
 C:\Diploma\EvacSystem\EvacProject\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.resources.dll
@@ -134,3 +133,5 @@ C:\Diploma\EvacSystem\EvacProject\bin\Debug\net9.0\Info.json
 C:\Diploma\EvacSystem\EvacProject\bin\Debug\net9.0\Telegram.Bot.dll
 C:\Diploma\EvacSystem\EvacProject\obj\Debug\net9.0\EvacProject.MvcApplicationPartsAssemblyInfo.cs
 C:\Diploma\EvacSystem\EvacProject\bin\Debug\net9.0\Newtonsoft.Json.dll
+C:\Diploma\EvacSystem\EvacProject\bin\Debug\net9.0\News.json
+C:\Diploma\EvacSystem\EvacProject\bin\Debug\net9.0\subscribers.json
