@@ -1,0 +1,105 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\EvacuationPlans\\Campus_1\\Flor_1.png",
+      "PackagePath": "staticwebassets\\EvacuationPlans\\Campus_1\\Flor_1.png"
+    },
+    {
+      "Id": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\EvacuationPlans\\Campus_1\\Flor_2.png",
+      "PackagePath": "staticwebassets\\EvacuationPlans\\Campus_1\\Flor_2.png"
+    },
+    {
+      "Id": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\EvacuationPlans\\Campus_1\\Flor_3.png",
+      "PackagePath": "staticwebassets\\EvacuationPlans\\Campus_1\\Flor_3.png"
+    },
+    {
+      "Id": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\EvacuationPlans\\Campus_1\\Flor_4.png",
+      "PackagePath": "staticwebassets\\EvacuationPlans\\Campus_1\\Flor_4.png"
+    },
+    {
+      "Id": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\EvacuationPlans\\Campus_1\\Flor_5.png",
+      "PackagePath": "staticwebassets\\EvacuationPlans\\Campus_1\\Flor_5.png"
+    },
+    {
+      "Id": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\EvacuationPlans\\Campus_2\\Flor_1.png",
+      "PackagePath": "staticwebassets\\EvacuationPlans\\Campus_2\\Flor_1.png"
+    },
+    {
+      "Id": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\EvacuationPlans\\Campus_2\\Flor_2.png",
+      "PackagePath": "staticwebassets\\EvacuationPlans\\Campus_2\\Flor_2.png"
+    },
+    {
+      "Id": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\EvacuationPlans\\Campus_2\\Flor_3.png",
+      "PackagePath": "staticwebassets\\EvacuationPlans\\Campus_2\\Flor_3.png"
+    },
+    {
+      "Id": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\EvacuationPlans\\Campus_2\\Flor_4.png",
+      "PackagePath": "staticwebassets\\EvacuationPlans\\Campus_2\\Flor_4.png"
+    },
+    {
+      "Id": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\EvacuationPlans\\Campus_2\\Flor_5.png",
+      "PackagePath": "staticwebassets\\EvacuationPlans\\Campus_2\\Flor_5.png"
+    },
+    {
+      "Id": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\EvacuationPlans\\Campus_3\\Flor_1.png",
+      "PackagePath": "staticwebassets\\EvacuationPlans\\Campus_3\\Flor_1.png"
+    },
+    {
+      "Id": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\EvacuationPlans\\Campus_3\\Flor_2.png",
+      "PackagePath": "staticwebassets\\EvacuationPlans\\Campus_3\\Flor_2.png"
+    },
+    {
+      "Id": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\EvacuationPlans\\Campus_3\\Flor_3.png",
+      "PackagePath": "staticwebassets\\EvacuationPlans\\Campus_3\\Flor_3.png"
+    },
+    {
+      "Id": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\EvacuationPlans\\Campus_3\\Flor_4.png",
+      "PackagePath": "staticwebassets\\EvacuationPlans\\Campus_3\\Flor_4.png"
+    },
+    {
+      "Id": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\EvacuationPlans\\Campus_3\\Flor_5.png",
+      "PackagePath": "staticwebassets\\EvacuationPlans\\Campus_3\\Flor_5.png"
+    },
+    {
+      "Id": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\EvacuationPlans\\Campus_4\\Flor_1.png",
+      "PackagePath": "staticwebassets\\EvacuationPlans\\Campus_4\\Flor_1.png"
+    },
+    {
+      "Id": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\EvacuationPlans\\Campus_4\\Flor_2.png",
+      "PackagePath": "staticwebassets\\EvacuationPlans\\Campus_4\\Flor_2.png"
+    },
+    {
+      "Id": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\EvacuationPlans\\Campus_4\\Flor_3.png",
+      "PackagePath": "staticwebassets\\EvacuationPlans\\Campus_4\\Flor_3.png"
+    },
+    {
+      "Id": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\EvacuationPlans\\Campus_4\\Flor_4.png",
+      "PackagePath": "staticwebassets\\EvacuationPlans\\Campus_4\\Flor_4.png"
+    },
+    {
+      "Id": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\EvacuationPlans\\Campus_4\\Flor_5.png",
+      "PackagePath": "staticwebassets\\EvacuationPlans\\Campus_4\\Flor_5.png"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.EvacProject.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.EvacProject.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.build.EvacProject.props",
+      "PackagePath": "build\\EvacProject.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildMultiTargeting.EvacProject.props",
+      "PackagePath": "buildMultiTargeting\\EvacProject.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildTransitive.EvacProject.props",
+      "PackagePath": "buildTransitive\\EvacProject.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

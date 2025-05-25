@@ -25,5 +25,10 @@ namespace EvacProject.GENERAL.Entity
         public DateTime? TicketExpiryDate { get; set; }
     
         public string? TelegramChatId { get; set; }
+        
+        [MaxLength(50)]
+        public string CurrentState { get; set; } 
+        [MaxLength(10)]
+        public string SelectedCampus { get; set; }
     }
 }

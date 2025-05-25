@@ -9,7 +9,10 @@
     <ItemGroup>
       <Folder Include="Migrations\" />
       <Folder Include="WEB\" />
-      <Folder Include="wwwroot\" />
+      <Folder Include="wwwroot\EvacuationPlans\Campus_1\" />
+      <Folder Include="wwwroot\EvacuationPlans\Campus_2\" />
+      <Folder Include="wwwroot\EvacuationPlans\Campus_3\" />
+      <Folder Include="wwwroot\EvacuationPlans\Campus_4\" />
     </ItemGroup>
 
     <ItemGroup>

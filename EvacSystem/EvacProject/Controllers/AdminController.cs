@@ -5,6 +5,7 @@ using EvacProject.GENERAL.Data;
 using EvacProject.Services;
 using Microsoft.Extensions.Logging;
 using System.Linq;
+using System;
 
 namespace EvacProject.Controllers
 {
@@ -59,13 +60,20 @@ namespace EvacProject.Controllers
             _logger.LogInformation("AdminController: SimulateEmergency called");
             try
             {
-                await _botService.SendMessageToAllStudents("ВНИМАНИЕ! В здании университета произошло ЧС, немедленно эвакуируйтесь");
-                ViewBag.Message = "Сообщение об эвакуации отправлено всем студентам.";
+                if (HttpContext.Session.GetString("AdminAuthenticated") != "true")
+                {
+                    _logger.LogWarning("SimulateEmergency: Session invalid, redirecting to Login");
+                    return RedirectToAction("Login");
+                }
+
+                await _botService.StartEvacuationTestAsync(_dbContext, CancellationToken.None);
+                ViewBag.Message = "Тестовая эвакуация успешно запущена.";
+                _logger.LogInformation("SimulateEmergency: Evacuation test started successfully");
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error sending emergency message");
-                ViewBag.Error = "Ошибка при отправке сообщения об эвакуации.";
+                _logger.LogError(ex, "SimulateEmergency: Error starting evacuation test");
+                ViewBag.Error = "Произошла ошибка при запуске тестовой эвакуации.";
             }
             return View("Index");
         }
@@ -95,6 +103,7 @@ namespace EvacProject.Controllers
                 .ToListAsync();
             return View(messages);
         }
+
         [HttpPost]
         public async Task<IActionResult> ClearHelpMessages()
         {
@@ -102,14 +111,12 @@ namespace EvacProject.Controllers
                 HttpContext.Session.GetString("AdminAuthenticated"), HttpContext.Request.Method);
             try
             {
-                // Проверка сессии
                 if (HttpContext.Session.GetString("AdminAuthenticated") != "true")
                 {
                     _logger.LogWarning("ClearHelpMessages: Session invalid, redirecting to Login");
                     return RedirectToAction("Login");
                 }
 
-                // Проверка подключения к базе данных
                 if (!await _dbContext.Database.CanConnectAsync())
                 {
                     _logger.LogError("ClearHelpMessages: Database connection failed");

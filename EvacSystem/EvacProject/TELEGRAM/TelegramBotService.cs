@@ -6,6 +6,7 @@ using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using EvacProject.GENERAL.Data;
 using EvacProject.GENERAL.Entity;
+using Telegram.Bot.Types.ReplyMarkups;
 
 namespace EvacProject.Services
 {
@@ -110,6 +111,55 @@ namespace EvacProject.Services
                 }
             }
             _logger.LogInformation("SendMessageToAllStudents: Completed");
+        }
+        
+        public async Task StartEvacuationTestAsync(ApplicationDbContext dbContext, CancellationToken cancellationToken)
+        {
+            _logger.LogInformation("TelegramBotService: Starting evacuation test");
+            try
+            {
+                var students = await dbContext.Students
+                    .Where(s => !string.IsNullOrEmpty(s.TelegramChatId))
+                    .ToListAsync(cancellationToken);
+
+                var keyboard = new ReplyKeyboardMarkup(new[]
+                {
+                    new[] { new KeyboardButton("1"), new KeyboardButton("2") },
+                    new[] { new KeyboardButton("3"), new KeyboardButton("4") }
+                })
+                {
+                    OneTimeKeyboard = true
+                };
+
+                foreach (var student in students)
+                {
+                    try
+                    {
+                        student.CurrentState = EvacuationState.WaitingForCampus.ToString();
+                        student.SelectedCampus = null;
+        
+                        await _botClient.SendTextMessageAsync(
+                            chatId: long.Parse(student.TelegramChatId),
+                            text: "ВНИМАНИЕ! В здании университета произошло ЧС, немедленно эвакуируйтесь\n" +
+                                  "Пожалуйста, укажите, в каком корпусе вы находитесь:",
+                            replyMarkup: keyboard,
+                            cancellationToken: cancellationToken);
+                        _logger.LogInformation($"Sent evacuation alert to student: StudentNumber={student.StudentNumber}, ChatId={student.TelegramChatId}");
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError(ex, $"Failed to send evacuation alert to student: StudentNumber={student.StudentNumber}, ChatId={student.TelegramChatId}");
+                    }
+                }
+        
+                await dbContext.SaveChangesAsync(cancellationToken);
+                _logger.LogInformation($"Evacuation test started: NotifiedStudents={students.Count}");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error starting evacuation test");
+                throw;
+            }
         }
 
         private async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
@@ -780,6 +830,112 @@ namespace EvacProject.Services
                             cancellationToken: cancellationToken);
                     }
                     return;
+                }
+                
+                if (student != null && student.CurrentState == EvacuationState.WaitingForCampus.ToString())
+                {
+                    if (new[] { "1", "2", "3", "4" }.Contains(messageText))
+                    {
+                        try
+                        {
+                            student.SelectedCampus = messageText;
+                            student.CurrentState = EvacuationState.WaitingForFloor.ToString();
+                            await dbContext.SaveChangesAsync(cancellationToken);
+
+                            var keyboard = new ReplyKeyboardMarkup(new[]
+                            {
+                                new[] { new KeyboardButton("1"), new KeyboardButton("2") },
+                                new[] { new KeyboardButton("3"), new KeyboardButton("4") },
+                                new[] { new KeyboardButton("5") }
+                            })
+                            {
+                                OneTimeKeyboard = true
+                            };
+
+                            await _botClient.SendTextMessageAsync(
+                                chatId: chatId,
+                                text: "Пожалуйста, укажите, на каком этаже вы находитесь:",
+                                replyMarkup: keyboard,
+                                cancellationToken: cancellationToken);
+                            _logger.LogInformation($"Student selected campus: StudentNumber={student.StudentNumber}, Campus={messageText}, ChatId={chatId}");
+                        }
+                        catch (Exception ex)
+                        {
+                            _logger.LogError(ex, $"Error processing campus selection, ChatId={chatId}");
+                            await _botClient.SendTextMessageAsync(
+                                chatId: chatId,
+                                text: "Произошла ошибка. Попробуйте позже.",
+                                cancellationToken: cancellationToken);
+                        }
+                        return;
+                    }
+                    else
+                    {
+                        await _botClient.SendTextMessageAsync(
+                            chatId: chatId,
+                            text: "Неверный выбор корпуса. Пожалуйста, выберите 1, 2, 3 или 4.",
+                            cancellationToken: cancellationToken);
+                        return;
+                    }
+                }
+
+                if (student != null && student.CurrentState == EvacuationState.WaitingForFloor.ToString())
+                {
+                    if (new[] { "1", "2", "3", "4", "5" }.Contains(messageText))
+                    {
+                        try
+                        {
+                            var campus = student.SelectedCampus;
+                            var floor = messageText;
+                            var imagePath = Path.Combine(_environment.WebRootPath, "EvacuationPlans", $"Campus_{campus}", $"Flor_{floor}.png");
+
+                            if (System.IO.File.Exists(imagePath))
+                            {
+                                await using var stream = System.IO.File.OpenRead(imagePath);
+                                await _botClient.SendPhotoAsync(
+                                    chatId: chatId,
+                                    photo: new Telegram.Bot.Types.InputFileStream(stream, $"Flor_{floor}.png"),
+                                    caption: "Пожалуйста, следуйте плану эвакуации. Берегите себя!",
+                                    replyMarkup: new ReplyKeyboardRemove(),
+                                    cancellationToken: cancellationToken);
+                                _logger.LogInformation($"Sent evacuation plan: StudentNumber={student.StudentNumber}, Campus={campus}, Floor={floor}, ChatId={chatId}");
+                            }
+                            else
+                            {
+                                await _botClient.SendTextMessageAsync(
+                                    chatId: chatId,
+                                    text: "Извините, план эвакуации не найден.",
+                                    replyMarkup: new ReplyKeyboardRemove(),
+                                    cancellationToken: cancellationToken);
+                                _logger.LogWarning($"Evacuation plan not found: Path={imagePath}, ChatId={chatId}");
+                            }
+
+                            student.CurrentState = EvacuationState.None.ToString();
+                            student.SelectedCampus = null;
+                            await dbContext.SaveChangesAsync(cancellationToken);
+                        }
+                        catch (Exception ex)
+                        {
+                            _logger.LogError(ex, $"Error sending evacuation plan, ChatId={chatId}");
+                            await _botClient.SendTextMessageAsync(
+                                chatId: chatId,
+                                text: "Произошла ошибка при отправке плана эвакуации. Попробуйте позже.",
+                                replyMarkup: new ReplyKeyboardRemove(),
+                                cancellationToken: cancellationToken);
+                            student.CurrentState = EvacuationState.None.ToString();
+                            student.SelectedCampus = null;
+                            await dbContext.SaveChangesAsync(cancellationToken);
+                        }
+                        return;
+                    }
+                    else
+                    {
+                        await _botClient.SendTextMessageAsync(
+                            chatId: chatId,
+                            text: "Неверный выбор этажа. Пожалуйста, выберите 1, 2, 3, 4 или 5.",
+                            cancellationToken: cancellationToken);
+                        return;
+                    }
                 }
 
                 await _botClient.SendMessage(
