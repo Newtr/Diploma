@@ -2,9 +2,36 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Симулятор ЧС";
 }
+
+<head>
+    <link href="~/css/simulator.css" rel="stylesheet" asp-append-version="true">
+</head>
+
 <div class="py-8">
     <h1 class="text-3xl font-bold text-gray-900">Симулятор ЧС</h1>
-    <p class="mt-4 text-lg text-gray-700">
+    <p class="mt-4 text-lg text-gray-700" style="text-align: center">
         Попробуйте наш симулятор чрезвычайных ситуаций, чтобы подготовиться к реальным сценариям.
     </p>
+
+    <div class="container">
+        <h1>План эвакуации здания</h1>
+
+        <div class="controls">
+            <button id="blockModeBtn">Режим блокировки</button>
+            <button id="clearBlockedBtn">Очистить блокировки</button>
+            <button id="findPathBtn">Найти путь</button>
+            <button id="clearPathBtn">Очистить путь</button>
+        </div>
+
+        <div id="mapContainer"></div>
+
+        <div id="infoPanel"></div>
+
+        <a href="@Url.Action("Index", "Home")" class="nav-button" id="toIndexBtn">
+            <i class="fas fa-arrow-left"></i> Вернуться на главную
+        </a>
+    </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+<script src="~/js/simulator.js" asp-append-version="true"></script>

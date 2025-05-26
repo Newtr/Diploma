@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "vTath1+FkzP+8WRccA1LziT1PzbAtB011sPVfGWoNfU=",
+  "Hash": "s85xIfPtlmBL1e9p2p8dkn2byA3HamOtpTbtdSiSd6g=",
   "Source": "EvacProject",
   "BasePath": "_content/EvacProject",
   "Mode": "Default",
@@ -16,6 +16,48 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\1y5ijga2k8-ab71leavbs.gz",
+      "SourceId": "EvacProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/EvacProject",
+      "RelativePath": "css/CreateStudent#[.{fingerprint=ab71leavbs}]?.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\CreateStudent.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "oy803cbfpo",
+      "Integrity": "YDCh4Iejw7MUgW45q/WCfleI/6bKDgoT8Bre2MuLkrQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\CreateStudent.css"
+    },
+    {
+      "Identity": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\2lbi2sl0ur-qszyczxu0n.gz",
+      "SourceId": "EvacProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/EvacProject",
+      "RelativePath": "css/HelpPanel#[.{fingerprint=qszyczxu0n}]?.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\HelpPanel.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "yx2pqooo36",
+      "Integrity": "2urZI5n/J0qnI0w/6RrqQdGy0qP4jV+U1Oo3LzClbeY=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\HelpPanel.css"
+    },
     {
       "Identity": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\aiic1tdghp-0g90l3bkhw.gz",
       "SourceId": "EvacProject",
@@ -36,6 +78,48 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\site.css"
+    },
+    {
+      "Identity": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\ejfcq2k0he-e0jw4jjhga.gz",
+      "SourceId": "EvacProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/EvacProject",
+      "RelativePath": "css/AdminStudent#[.{fingerprint=e0jw4jjhga}]?.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\AdminStudent.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "23wj7dp4ex",
+      "Integrity": "LnQvIij1Dfgavk30WykBCCceR/0/LVK+KjR0pXK/Tyg=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\AdminStudent.css"
+    },
+    {
+      "Identity": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\fmmw3uxd5r-ab71leavbs.gz",
+      "SourceId": "EvacProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/EvacProject",
+      "RelativePath": "css/EditStudent#[.{fingerprint=ab71leavbs}]?.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\EditStudent.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "oy803cbfpo",
+      "Integrity": "YDCh4Iejw7MUgW45q/WCfleI/6bKDgoT8Bre2MuLkrQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\EditStudent.css"
     },
     {
       "Identity": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\hq1dzla4b6-9lce5x6lk1.gz",
@@ -59,6 +143,69 @@
       "OriginalItemSpec": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\icons\\vk.svg"
     },
     {
+      "Identity": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\is7cwoxejx-edwbs3jz96.gz",
+      "SourceId": "EvacProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/EvacProject",
+      "RelativePath": "css/simulator#[.{fingerprint=edwbs3jz96}]?.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\simulator.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "3ui9gxcwe3",
+      "Integrity": "m7umQb1mDEZ64/AAnu5dzBKm4MvnflorHb/Sxlz/N0U=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\simulator.css"
+    },
+    {
+      "Identity": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\jkgirv3dj4-moszsvz95r.gz",
+      "SourceId": "EvacProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/EvacProject",
+      "RelativePath": "js/simulator#[.{fingerprint=moszsvz95r}]?.js.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\js\\simulator.js",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "p4s55vbj9u",
+      "Integrity": "V3GMFnZytlbIjSzkOgLwzSJToFvVAG/tgGuKbP1xrsw=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\js\\simulator.js"
+    },
+    {
+      "Identity": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\kx0eowvowl-kp9h98w3gi.gz",
+      "SourceId": "EvacProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/EvacProject",
+      "RelativePath": "css/AdminPanel#[.{fingerprint=kp9h98w3gi}]?.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\AdminPanel.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "p5yzirmr76",
+      "Integrity": "U6p+sA1RatrIjtC59piUN2FFJ3flodxxTwRNAi3dfWo=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\AdminPanel.css"
+    },
+    {
       "Identity": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\p6zwelv5d6-ls45c2unjd.gz",
       "SourceId": "EvacProject",
       "SourceType": "Discovered",
@@ -78,6 +225,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\icons\\telegram.svg"
+    },
+    {
+      "Identity": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\pa5po625uy-yne4xe871x.gz",
+      "SourceId": "EvacProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/EvacProject",
+      "RelativePath": "css/StudentDetail#[.{fingerprint=yne4xe871x}]?.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\StudentDetail.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "plfzo1j7s1",
+      "Integrity": "QxoTuNraB7WpHxsMyJ4I8nvCS686IzJWsiqccBap5Hw=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\StudentDetail.css"
     },
     {
       "Identity": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\rb52iwhzjk-ibvndv91ph.gz",
@@ -122,6 +290,132 @@
       "OriginalItemSpec": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\js\\site.js"
     },
     {
+      "Identity": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\AdminPanel.css",
+      "SourceId": "EvacProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\",
+      "BasePath": "_content/EvacProject",
+      "RelativePath": "css/AdminPanel#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "kp9h98w3gi",
+      "Integrity": "aNSsWRDSQzd8UHdAzfs0xXhh9IuEujqQ5U0tYRIYnkQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\AdminPanel.css"
+    },
+    {
+      "Identity": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\AdminStudent.css",
+      "SourceId": "EvacProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\",
+      "BasePath": "_content/EvacProject",
+      "RelativePath": "css/AdminStudent#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "e0jw4jjhga",
+      "Integrity": "wrePLDOVSV2kKJDRHyLfNs4PlPwExx5IAZbhNRa3H4Y=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\AdminStudent.css"
+    },
+    {
+      "Identity": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\CreateStudent.css",
+      "SourceId": "EvacProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\",
+      "BasePath": "_content/EvacProject",
+      "RelativePath": "css/CreateStudent#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "ab71leavbs",
+      "Integrity": "updUKNOwyCDkEBCaxMi/BWYt36DCNo3/8xteOBk1Nyc=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\CreateStudent.css"
+    },
+    {
+      "Identity": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\EditStudent.css",
+      "SourceId": "EvacProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\",
+      "BasePath": "_content/EvacProject",
+      "RelativePath": "css/EditStudent#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "ab71leavbs",
+      "Integrity": "updUKNOwyCDkEBCaxMi/BWYt36DCNo3/8xteOBk1Nyc=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\EditStudent.css"
+    },
+    {
+      "Identity": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\HelpPanel.css",
+      "SourceId": "EvacProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\",
+      "BasePath": "_content/EvacProject",
+      "RelativePath": "css/HelpPanel#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "qszyczxu0n",
+      "Integrity": "unEZOuSgvXgSlPvxdlv7T7dZE8oa2I1mShybL57veXE=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\HelpPanel.css"
+    },
+    {
+      "Identity": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\simulator.css",
+      "SourceId": "EvacProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\",
+      "BasePath": "_content/EvacProject",
+      "RelativePath": "css/simulator#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "edwbs3jz96",
+      "Integrity": "ovCHP6SJIGFABJoK/RDZC79Wexm0hc5pmFjujDipHeQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\simulator.css"
+    },
+    {
       "Identity": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\site.css",
       "SourceId": "EvacProject",
       "SourceType": "Discovered",
@@ -141,6 +435,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
+    },
+    {
+      "Identity": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\StudentDetail.css",
+      "SourceId": "EvacProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\",
+      "BasePath": "_content/EvacProject",
+      "RelativePath": "css/StudentDetail#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "yne4xe871x",
+      "Integrity": "PhwH/fKh4wQE9b6AYtOqoKjyrBz8XyDJjWKCrkvFaVg=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\StudentDetail.css"
     },
     {
       "Identity": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\documents\\emergency-procedures.pdf",
@@ -710,6 +1025,27 @@
       "OriginalItemSpec": "wwwroot\\images\\logo.png"
     },
     {
+      "Identity": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\js\\simulator.js",
+      "SourceId": "EvacProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\",
+      "BasePath": "_content/EvacProject",
+      "RelativePath": "js/simulator#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "moszsvz95r",
+      "Integrity": "Cpz+v7UE8qnm/h51MiY2oqK/geuCpRWA3T9JzsMsp34=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\simulator.js"
+    },
+    {
       "Identity": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\js\\site.js",
       "SourceId": "EvacProject",
       "SourceType": "Discovered",
@@ -732,6 +1068,1794 @@
     }
   ],
   "Endpoints": [
+    {
+      "Route": "css/AdminPanel.css",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\kx0eowvowl-kp9h98w3gi.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001600000000"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "624"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"U6p+sA1RatrIjtC59piUN2FFJ3flodxxTwRNAi3dfWo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 10:50:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"aNSsWRDSQzd8UHdAzfs0xXhh9IuEujqQ5U0tYRIYnkQ=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-aNSsWRDSQzd8UHdAzfs0xXhh9IuEujqQ5U0tYRIYnkQ="
+        }
+      ]
+    },
+    {
+      "Route": "css/AdminPanel.css",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\AdminPanel.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2252"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"aNSsWRDSQzd8UHdAzfs0xXhh9IuEujqQ5U0tYRIYnkQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 10:50:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-aNSsWRDSQzd8UHdAzfs0xXhh9IuEujqQ5U0tYRIYnkQ="
+        }
+      ]
+    },
+    {
+      "Route": "css/AdminPanel.css.gz",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\kx0eowvowl-kp9h98w3gi.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "624"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"U6p+sA1RatrIjtC59piUN2FFJ3flodxxTwRNAi3dfWo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 10:50:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-U6p+sA1RatrIjtC59piUN2FFJ3flodxxTwRNAi3dfWo="
+        }
+      ]
+    },
+    {
+      "Route": "css/AdminPanel.kp9h98w3gi.css",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\kx0eowvowl-kp9h98w3gi.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001600000000"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "624"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"U6p+sA1RatrIjtC59piUN2FFJ3flodxxTwRNAi3dfWo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 10:50:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"aNSsWRDSQzd8UHdAzfs0xXhh9IuEujqQ5U0tYRIYnkQ=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "kp9h98w3gi"
+        },
+        {
+          "Name": "label",
+          "Value": "css/AdminPanel.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-aNSsWRDSQzd8UHdAzfs0xXhh9IuEujqQ5U0tYRIYnkQ="
+        }
+      ]
+    },
+    {
+      "Route": "css/AdminPanel.kp9h98w3gi.css",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\AdminPanel.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2252"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"aNSsWRDSQzd8UHdAzfs0xXhh9IuEujqQ5U0tYRIYnkQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 10:50:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "kp9h98w3gi"
+        },
+        {
+          "Name": "label",
+          "Value": "css/AdminPanel.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-aNSsWRDSQzd8UHdAzfs0xXhh9IuEujqQ5U0tYRIYnkQ="
+        }
+      ]
+    },
+    {
+      "Route": "css/AdminPanel.kp9h98w3gi.css.gz",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\kx0eowvowl-kp9h98w3gi.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "624"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"U6p+sA1RatrIjtC59piUN2FFJ3flodxxTwRNAi3dfWo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 10:50:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "kp9h98w3gi"
+        },
+        {
+          "Name": "label",
+          "Value": "css/AdminPanel.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-U6p+sA1RatrIjtC59piUN2FFJ3flodxxTwRNAi3dfWo="
+        }
+      ]
+    },
+    {
+      "Route": "css/AdminStudent.css",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\ejfcq2k0he-e0jw4jjhga.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001273885350"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "784"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"LnQvIij1Dfgavk30WykBCCceR/0/LVK+KjR0pXK/Tyg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 12:23:19 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"wrePLDOVSV2kKJDRHyLfNs4PlPwExx5IAZbhNRa3H4Y=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-wrePLDOVSV2kKJDRHyLfNs4PlPwExx5IAZbhNRa3H4Y="
+        }
+      ]
+    },
+    {
+      "Route": "css/AdminStudent.css",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\AdminStudent.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3088"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"wrePLDOVSV2kKJDRHyLfNs4PlPwExx5IAZbhNRa3H4Y=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 12:23:19 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-wrePLDOVSV2kKJDRHyLfNs4PlPwExx5IAZbhNRa3H4Y="
+        }
+      ]
+    },
+    {
+      "Route": "css/AdminStudent.css.gz",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\ejfcq2k0he-e0jw4jjhga.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "784"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"LnQvIij1Dfgavk30WykBCCceR/0/LVK+KjR0pXK/Tyg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 12:23:19 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-LnQvIij1Dfgavk30WykBCCceR/0/LVK+KjR0pXK/Tyg="
+        }
+      ]
+    },
+    {
+      "Route": "css/AdminStudent.e0jw4jjhga.css",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\ejfcq2k0he-e0jw4jjhga.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001273885350"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "784"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"LnQvIij1Dfgavk30WykBCCceR/0/LVK+KjR0pXK/Tyg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 12:23:19 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"wrePLDOVSV2kKJDRHyLfNs4PlPwExx5IAZbhNRa3H4Y=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "e0jw4jjhga"
+        },
+        {
+          "Name": "label",
+          "Value": "css/AdminStudent.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-wrePLDOVSV2kKJDRHyLfNs4PlPwExx5IAZbhNRa3H4Y="
+        }
+      ]
+    },
+    {
+      "Route": "css/AdminStudent.e0jw4jjhga.css",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\AdminStudent.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3088"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"wrePLDOVSV2kKJDRHyLfNs4PlPwExx5IAZbhNRa3H4Y=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 12:23:19 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "e0jw4jjhga"
+        },
+        {
+          "Name": "label",
+          "Value": "css/AdminStudent.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-wrePLDOVSV2kKJDRHyLfNs4PlPwExx5IAZbhNRa3H4Y="
+        }
+      ]
+    },
+    {
+      "Route": "css/AdminStudent.e0jw4jjhga.css.gz",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\ejfcq2k0he-e0jw4jjhga.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "784"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"LnQvIij1Dfgavk30WykBCCceR/0/LVK+KjR0pXK/Tyg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 12:23:19 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "e0jw4jjhga"
+        },
+        {
+          "Name": "label",
+          "Value": "css/AdminStudent.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-LnQvIij1Dfgavk30WykBCCceR/0/LVK+KjR0pXK/Tyg="
+        }
+      ]
+    },
+    {
+      "Route": "css/CreateStudent.ab71leavbs.css",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\1y5ijga2k8-ab71leavbs.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001434720230"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "696"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"YDCh4Iejw7MUgW45q/WCfleI/6bKDgoT8Bre2MuLkrQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 12:06:01 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"updUKNOwyCDkEBCaxMi/BWYt36DCNo3/8xteOBk1Nyc=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ab71leavbs"
+        },
+        {
+          "Name": "label",
+          "Value": "css/CreateStudent.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-updUKNOwyCDkEBCaxMi/BWYt36DCNo3/8xteOBk1Nyc="
+        }
+      ]
+    },
+    {
+      "Route": "css/CreateStudent.ab71leavbs.css",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\CreateStudent.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2433"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"updUKNOwyCDkEBCaxMi/BWYt36DCNo3/8xteOBk1Nyc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 12:06:01 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ab71leavbs"
+        },
+        {
+          "Name": "label",
+          "Value": "css/CreateStudent.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-updUKNOwyCDkEBCaxMi/BWYt36DCNo3/8xteOBk1Nyc="
+        }
+      ]
+    },
+    {
+      "Route": "css/CreateStudent.ab71leavbs.css.gz",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\1y5ijga2k8-ab71leavbs.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "696"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"YDCh4Iejw7MUgW45q/WCfleI/6bKDgoT8Bre2MuLkrQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 12:06:01 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ab71leavbs"
+        },
+        {
+          "Name": "label",
+          "Value": "css/CreateStudent.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-YDCh4Iejw7MUgW45q/WCfleI/6bKDgoT8Bre2MuLkrQ="
+        }
+      ]
+    },
+    {
+      "Route": "css/CreateStudent.css",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\1y5ijga2k8-ab71leavbs.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001434720230"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "696"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"YDCh4Iejw7MUgW45q/WCfleI/6bKDgoT8Bre2MuLkrQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 12:06:01 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"updUKNOwyCDkEBCaxMi/BWYt36DCNo3/8xteOBk1Nyc=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-updUKNOwyCDkEBCaxMi/BWYt36DCNo3/8xteOBk1Nyc="
+        }
+      ]
+    },
+    {
+      "Route": "css/CreateStudent.css",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\CreateStudent.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2433"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"updUKNOwyCDkEBCaxMi/BWYt36DCNo3/8xteOBk1Nyc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 12:06:01 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-updUKNOwyCDkEBCaxMi/BWYt36DCNo3/8xteOBk1Nyc="
+        }
+      ]
+    },
+    {
+      "Route": "css/CreateStudent.css.gz",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\1y5ijga2k8-ab71leavbs.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "696"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"YDCh4Iejw7MUgW45q/WCfleI/6bKDgoT8Bre2MuLkrQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 12:06:01 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-YDCh4Iejw7MUgW45q/WCfleI/6bKDgoT8Bre2MuLkrQ="
+        }
+      ]
+    },
+    {
+      "Route": "css/EditStudent.ab71leavbs.css",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\fmmw3uxd5r-ab71leavbs.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001434720230"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "696"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"YDCh4Iejw7MUgW45q/WCfleI/6bKDgoT8Bre2MuLkrQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 12:06:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"updUKNOwyCDkEBCaxMi/BWYt36DCNo3/8xteOBk1Nyc=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ab71leavbs"
+        },
+        {
+          "Name": "label",
+          "Value": "css/EditStudent.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-updUKNOwyCDkEBCaxMi/BWYt36DCNo3/8xteOBk1Nyc="
+        }
+      ]
+    },
+    {
+      "Route": "css/EditStudent.ab71leavbs.css",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\EditStudent.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2433"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"updUKNOwyCDkEBCaxMi/BWYt36DCNo3/8xteOBk1Nyc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 12:06:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ab71leavbs"
+        },
+        {
+          "Name": "label",
+          "Value": "css/EditStudent.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-updUKNOwyCDkEBCaxMi/BWYt36DCNo3/8xteOBk1Nyc="
+        }
+      ]
+    },
+    {
+      "Route": "css/EditStudent.ab71leavbs.css.gz",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\fmmw3uxd5r-ab71leavbs.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "696"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"YDCh4Iejw7MUgW45q/WCfleI/6bKDgoT8Bre2MuLkrQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 12:06:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ab71leavbs"
+        },
+        {
+          "Name": "label",
+          "Value": "css/EditStudent.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-YDCh4Iejw7MUgW45q/WCfleI/6bKDgoT8Bre2MuLkrQ="
+        }
+      ]
+    },
+    {
+      "Route": "css/EditStudent.css",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\fmmw3uxd5r-ab71leavbs.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001434720230"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "696"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"YDCh4Iejw7MUgW45q/WCfleI/6bKDgoT8Bre2MuLkrQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 12:06:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"updUKNOwyCDkEBCaxMi/BWYt36DCNo3/8xteOBk1Nyc=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-updUKNOwyCDkEBCaxMi/BWYt36DCNo3/8xteOBk1Nyc="
+        }
+      ]
+    },
+    {
+      "Route": "css/EditStudent.css",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\EditStudent.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2433"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"updUKNOwyCDkEBCaxMi/BWYt36DCNo3/8xteOBk1Nyc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 12:06:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-updUKNOwyCDkEBCaxMi/BWYt36DCNo3/8xteOBk1Nyc="
+        }
+      ]
+    },
+    {
+      "Route": "css/EditStudent.css.gz",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\fmmw3uxd5r-ab71leavbs.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "696"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"YDCh4Iejw7MUgW45q/WCfleI/6bKDgoT8Bre2MuLkrQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 12:06:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-YDCh4Iejw7MUgW45q/WCfleI/6bKDgoT8Bre2MuLkrQ="
+        }
+      ]
+    },
+    {
+      "Route": "css/HelpPanel.css",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\2lbi2sl0ur-qszyczxu0n.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001371742112"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "728"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"2urZI5n/J0qnI0w/6RrqQdGy0qP4jV+U1Oo3LzClbeY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 10:51:30 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"unEZOuSgvXgSlPvxdlv7T7dZE8oa2I1mShybL57veXE=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-unEZOuSgvXgSlPvxdlv7T7dZE8oa2I1mShybL57veXE="
+        }
+      ]
+    },
+    {
+      "Route": "css/HelpPanel.css",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\HelpPanel.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2780"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"unEZOuSgvXgSlPvxdlv7T7dZE8oa2I1mShybL57veXE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 10:51:30 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-unEZOuSgvXgSlPvxdlv7T7dZE8oa2I1mShybL57veXE="
+        }
+      ]
+    },
+    {
+      "Route": "css/HelpPanel.css.gz",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\2lbi2sl0ur-qszyczxu0n.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "728"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"2urZI5n/J0qnI0w/6RrqQdGy0qP4jV+U1Oo3LzClbeY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 10:51:30 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-2urZI5n/J0qnI0w/6RrqQdGy0qP4jV+U1Oo3LzClbeY="
+        }
+      ]
+    },
+    {
+      "Route": "css/HelpPanel.qszyczxu0n.css",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\2lbi2sl0ur-qszyczxu0n.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001371742112"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "728"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"2urZI5n/J0qnI0w/6RrqQdGy0qP4jV+U1Oo3LzClbeY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 10:51:30 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"unEZOuSgvXgSlPvxdlv7T7dZE8oa2I1mShybL57veXE=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "qszyczxu0n"
+        },
+        {
+          "Name": "label",
+          "Value": "css/HelpPanel.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-unEZOuSgvXgSlPvxdlv7T7dZE8oa2I1mShybL57veXE="
+        }
+      ]
+    },
+    {
+      "Route": "css/HelpPanel.qszyczxu0n.css",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\HelpPanel.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2780"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"unEZOuSgvXgSlPvxdlv7T7dZE8oa2I1mShybL57veXE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 10:51:30 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "qszyczxu0n"
+        },
+        {
+          "Name": "label",
+          "Value": "css/HelpPanel.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-unEZOuSgvXgSlPvxdlv7T7dZE8oa2I1mShybL57veXE="
+        }
+      ]
+    },
+    {
+      "Route": "css/HelpPanel.qszyczxu0n.css.gz",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\2lbi2sl0ur-qszyczxu0n.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "728"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"2urZI5n/J0qnI0w/6RrqQdGy0qP4jV+U1Oo3LzClbeY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 10:51:30 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "qszyczxu0n"
+        },
+        {
+          "Name": "label",
+          "Value": "css/HelpPanel.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-2urZI5n/J0qnI0w/6RrqQdGy0qP4jV+U1Oo3LzClbeY="
+        }
+      ]
+    },
+    {
+      "Route": "css/simulator.css",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\is7cwoxejx-edwbs3jz96.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000487329435"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2051"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"m7umQb1mDEZ64/AAnu5dzBKm4MvnflorHb/Sxlz/N0U=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 10:25:43 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"ovCHP6SJIGFABJoK/RDZC79Wexm0hc5pmFjujDipHeQ=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-ovCHP6SJIGFABJoK/RDZC79Wexm0hc5pmFjujDipHeQ="
+        }
+      ]
+    },
+    {
+      "Route": "css/simulator.css",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\simulator.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "9343"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ovCHP6SJIGFABJoK/RDZC79Wexm0hc5pmFjujDipHeQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 10:25:43 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-ovCHP6SJIGFABJoK/RDZC79Wexm0hc5pmFjujDipHeQ="
+        }
+      ]
+    },
+    {
+      "Route": "css/simulator.css.gz",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\is7cwoxejx-edwbs3jz96.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2051"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"m7umQb1mDEZ64/AAnu5dzBKm4MvnflorHb/Sxlz/N0U=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 10:25:43 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-m7umQb1mDEZ64/AAnu5dzBKm4MvnflorHb/Sxlz/N0U="
+        }
+      ]
+    },
+    {
+      "Route": "css/simulator.edwbs3jz96.css",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\is7cwoxejx-edwbs3jz96.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000487329435"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2051"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"m7umQb1mDEZ64/AAnu5dzBKm4MvnflorHb/Sxlz/N0U=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 10:25:43 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"ovCHP6SJIGFABJoK/RDZC79Wexm0hc5pmFjujDipHeQ=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "edwbs3jz96"
+        },
+        {
+          "Name": "label",
+          "Value": "css/simulator.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-ovCHP6SJIGFABJoK/RDZC79Wexm0hc5pmFjujDipHeQ="
+        }
+      ]
+    },
+    {
+      "Route": "css/simulator.edwbs3jz96.css",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\simulator.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "9343"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ovCHP6SJIGFABJoK/RDZC79Wexm0hc5pmFjujDipHeQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 10:25:43 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "edwbs3jz96"
+        },
+        {
+          "Name": "label",
+          "Value": "css/simulator.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-ovCHP6SJIGFABJoK/RDZC79Wexm0hc5pmFjujDipHeQ="
+        }
+      ]
+    },
+    {
+      "Route": "css/simulator.edwbs3jz96.css.gz",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\is7cwoxejx-edwbs3jz96.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2051"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"m7umQb1mDEZ64/AAnu5dzBKm4MvnflorHb/Sxlz/N0U=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 10:25:43 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "edwbs3jz96"
+        },
+        {
+          "Name": "label",
+          "Value": "css/simulator.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-m7umQb1mDEZ64/AAnu5dzBKm4MvnflorHb/Sxlz/N0U="
+        }
+      ]
+    },
     {
       "Route": "css/site.0g90l3bkhw.css",
       "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\aiic1tdghp-0g90l3bkhw.gz",
@@ -757,7 +2881,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 26 May 2025 08:10:31 GMT"
+          "Value": "Mon, 26 May 2025 12:36:18 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -818,7 +2942,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 26 May 2025 08:10:31 GMT"
+          "Value": "Mon, 26 May 2025 12:36:18 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -863,7 +2987,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 26 May 2025 08:10:31 GMT"
+          "Value": "Mon, 26 May 2025 12:36:18 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -918,7 +3042,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 26 May 2025 08:10:31 GMT"
+          "Value": "Mon, 26 May 2025 12:36:18 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -971,7 +3095,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 26 May 2025 08:10:31 GMT"
+          "Value": "Mon, 26 May 2025 12:36:18 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1008,7 +3132,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 26 May 2025 08:10:31 GMT"
+          "Value": "Mon, 26 May 2025 12:36:18 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1027,6 +3151,304 @@
         {
           "Name": "integrity",
           "Value": "sha256-ZJ9tmjV8M5hTv5QBFPP8j1hmU0XzLPGrHx7jiLfu1B8="
+        }
+      ]
+    },
+    {
+      "Route": "css/StudentDetail.css",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\pa5po625uy-yne4xe871x.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001552795031"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "643"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"QxoTuNraB7WpHxsMyJ4I8nvCS686IzJWsiqccBap5Hw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 12:04:39 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"PhwH/fKh4wQE9b6AYtOqoKjyrBz8XyDJjWKCrkvFaVg=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-PhwH/fKh4wQE9b6AYtOqoKjyrBz8XyDJjWKCrkvFaVg="
+        }
+      ]
+    },
+    {
+      "Route": "css/StudentDetail.css",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\StudentDetail.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2324"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"PhwH/fKh4wQE9b6AYtOqoKjyrBz8XyDJjWKCrkvFaVg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 12:04:39 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-PhwH/fKh4wQE9b6AYtOqoKjyrBz8XyDJjWKCrkvFaVg="
+        }
+      ]
+    },
+    {
+      "Route": "css/StudentDetail.css.gz",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\pa5po625uy-yne4xe871x.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "643"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"QxoTuNraB7WpHxsMyJ4I8nvCS686IzJWsiqccBap5Hw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 12:04:39 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-QxoTuNraB7WpHxsMyJ4I8nvCS686IzJWsiqccBap5Hw="
+        }
+      ]
+    },
+    {
+      "Route": "css/StudentDetail.yne4xe871x.css",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\pa5po625uy-yne4xe871x.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001552795031"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "643"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"QxoTuNraB7WpHxsMyJ4I8nvCS686IzJWsiqccBap5Hw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 12:04:39 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"PhwH/fKh4wQE9b6AYtOqoKjyrBz8XyDJjWKCrkvFaVg=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "yne4xe871x"
+        },
+        {
+          "Name": "label",
+          "Value": "css/StudentDetail.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-PhwH/fKh4wQE9b6AYtOqoKjyrBz8XyDJjWKCrkvFaVg="
+        }
+      ]
+    },
+    {
+      "Route": "css/StudentDetail.yne4xe871x.css",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\StudentDetail.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2324"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"PhwH/fKh4wQE9b6AYtOqoKjyrBz8XyDJjWKCrkvFaVg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 12:04:39 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "yne4xe871x"
+        },
+        {
+          "Name": "label",
+          "Value": "css/StudentDetail.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-PhwH/fKh4wQE9b6AYtOqoKjyrBz8XyDJjWKCrkvFaVg="
+        }
+      ]
+    },
+    {
+      "Route": "css/StudentDetail.yne4xe871x.css.gz",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\pa5po625uy-yne4xe871x.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "643"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"QxoTuNraB7WpHxsMyJ4I8nvCS686IzJWsiqccBap5Hw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 12:04:39 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "yne4xe871x"
+        },
+        {
+          "Name": "label",
+          "Value": "css/StudentDetail.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-QxoTuNraB7WpHxsMyJ4I8nvCS686IzJWsiqccBap5Hw="
         }
       ]
     },
@@ -3889,6 +6311,304 @@
         {
           "Name": "integrity",
           "Value": "sha256-3T3ijGDN52DjcYlYmqzqYAUn8mzKuDZJlKPUj8cvY9E="
+        }
+      ]
+    },
+    {
+      "Route": "js/simulator.js",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\jkgirv3dj4-moszsvz95r.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000209863589"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4764"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"V3GMFnZytlbIjSzkOgLwzSJToFvVAG/tgGuKbP1xrsw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 10:29:36 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"Cpz+v7UE8qnm/h51MiY2oqK/geuCpRWA3T9JzsMsp34=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Cpz+v7UE8qnm/h51MiY2oqK/geuCpRWA3T9JzsMsp34="
+        }
+      ]
+    },
+    {
+      "Route": "js/simulator.js",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\js\\simulator.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "22769"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Cpz+v7UE8qnm/h51MiY2oqK/geuCpRWA3T9JzsMsp34=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 10:29:36 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Cpz+v7UE8qnm/h51MiY2oqK/geuCpRWA3T9JzsMsp34="
+        }
+      ]
+    },
+    {
+      "Route": "js/simulator.js.gz",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\jkgirv3dj4-moszsvz95r.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4764"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"V3GMFnZytlbIjSzkOgLwzSJToFvVAG/tgGuKbP1xrsw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 10:29:36 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-V3GMFnZytlbIjSzkOgLwzSJToFvVAG/tgGuKbP1xrsw="
+        }
+      ]
+    },
+    {
+      "Route": "js/simulator.moszsvz95r.js",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\jkgirv3dj4-moszsvz95r.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000209863589"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4764"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"V3GMFnZytlbIjSzkOgLwzSJToFvVAG/tgGuKbP1xrsw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 10:29:36 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"Cpz+v7UE8qnm/h51MiY2oqK/geuCpRWA3T9JzsMsp34=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "moszsvz95r"
+        },
+        {
+          "Name": "label",
+          "Value": "js/simulator.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Cpz+v7UE8qnm/h51MiY2oqK/geuCpRWA3T9JzsMsp34="
+        }
+      ]
+    },
+    {
+      "Route": "js/simulator.moszsvz95r.js",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\js\\simulator.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "22769"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Cpz+v7UE8qnm/h51MiY2oqK/geuCpRWA3T9JzsMsp34=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 10:29:36 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "moszsvz95r"
+        },
+        {
+          "Name": "label",
+          "Value": "js/simulator.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Cpz+v7UE8qnm/h51MiY2oqK/geuCpRWA3T9JzsMsp34="
+        }
+      ]
+    },
+    {
+      "Route": "js/simulator.moszsvz95r.js.gz",
+      "AssetFile": "C:\\Diploma\\EvacSystem\\EvacProject\\obj\\Debug\\net9.0\\compressed\\jkgirv3dj4-moszsvz95r.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4764"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"V3GMFnZytlbIjSzkOgLwzSJToFvVAG/tgGuKbP1xrsw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 10:29:36 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "moszsvz95r"
+        },
+        {
+          "Name": "label",
+          "Value": "js/simulator.js.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-V3GMFnZytlbIjSzkOgLwzSJToFvVAG/tgGuKbP1xrsw="
         }
       ]
     },

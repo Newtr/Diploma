@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EvacProject")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ad78f6e787e8f8659f3668a6943590dd1cd55517")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7a1b9fcb5119310524d20bdcdb0cfb309ac17bbb")]
 [assembly: System.Reflection.AssemblyProductAttribute("EvacProject")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EvacProject")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

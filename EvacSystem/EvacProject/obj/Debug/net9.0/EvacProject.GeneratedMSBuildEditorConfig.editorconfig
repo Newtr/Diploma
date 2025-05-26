@@ -28,6 +28,14 @@ build_property._RazorSourceGeneratorDebug =
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
+[C:/Diploma/EvacSystem/EvacProject/Views/Admin/CreateStudent.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ3JlYXRlU3R1ZGVudC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Diploma/EvacSystem/EvacProject/Views/Admin/EditStudent.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRWRpdFN0dWRlbnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Diploma/EvacSystem/EvacProject/Views/Admin/HelpMessages.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSGVscE1lc3NhZ2VzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -38,6 +46,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Diploma/EvacSystem/EvacProject/Views/Admin/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTG9naW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Diploma/EvacSystem/EvacProject/Views/Admin/StudentDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cU3R1ZGVudERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Diploma/EvacSystem/EvacProject/Views/Admin/StudentManagement.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cU3R1ZGVudE1hbmFnZW1lbnQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Diploma/EvacSystem/EvacProject/Views/Home/About.cshtml]

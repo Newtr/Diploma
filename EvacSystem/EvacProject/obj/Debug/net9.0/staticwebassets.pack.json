@@ -81,6 +81,34 @@
       "PackagePath": "staticwebassets\\EvacuationPlans\\Campus_4\\Flor_5.png"
     },
     {
+      "Id": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\AdminPanel.css",
+      "PackagePath": "staticwebassets\\css\\AdminPanel.css"
+    },
+    {
+      "Id": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\AdminStudent.css",
+      "PackagePath": "staticwebassets\\css\\AdminStudent.css"
+    },
+    {
+      "Id": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\CreateStudent.css",
+      "PackagePath": "staticwebassets\\css\\CreateStudent.css"
+    },
+    {
+      "Id": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\EditStudent.css",
+      "PackagePath": "staticwebassets\\css\\EditStudent.css"
+    },
+    {
+      "Id": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\HelpPanel.css",
+      "PackagePath": "staticwebassets\\css\\HelpPanel.css"
+    },
+    {
+      "Id": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\StudentDetail.css",
+      "PackagePath": "staticwebassets\\css\\StudentDetail.css"
+    },
+    {
+      "Id": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\simulator.css",
+      "PackagePath": "staticwebassets\\css\\simulator.css"
+    },
+    {
       "Id": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
@@ -111,6 +139,10 @@
     {
       "Id": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\images\\logo.png",
       "PackagePath": "staticwebassets\\images\\logo.png"
+    },
+    {
+      "Id": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\js\\simulator.js",
+      "PackagePath": "staticwebassets\\js\\simulator.js"
     },
     {
       "Id": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\js\\site.js",

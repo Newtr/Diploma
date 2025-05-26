@@ -5,91 +5,105 @@
     ViewData["Title"] = "Сообщения помощи";
 }
 
-<h2>Сообщения помощи</h2>
+<head>
+    <link href="~/css/HelpPanel.css" rel="stylesheet" asp-append-version="true">
+</head>
 
-@if (TempData["Message"] != null)
-{
-    <div class="alert alert-success">
-        @TempData["Message"]
-    </div>
-}
+<div class="admin-container">
+    <nav class="admin-nav">
+        <a href="/Admin/Index">Панель администратора</a>
+        <a href="/Admin/HelpMessages" class="active">Сообщения помощи</a>
+        <a href="/Admin/StudentManagement">Управление студентами</a>
+    </nav>
 
-@if (TempData["Error"] != null)
-{
-    <div class="alert alert-danger">
-        @TempData["Error"]
-    </div>
-}
+    <div class="admin-card">
+        <h2>Сообщения помощи</h2>
 
-@if (Model.Any())
-{
-    <table class="table table-bordered">
-        <thead>
-        <tr>
-            <th>ФИО</th>
-            <th>Время (UTC)</th>
-            <th>Геолокация</th>
-            <th>Сообщение</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var message in Model)
+        @if (TempData["Message"] != null)
         {
-            <tr>
-                <td>@message.StudentFullName</td>
-                <td>@message.SentAt.ToString("HH:mm:ss")</td>
-                <td>
-                    @if (message.Latitude.HasValue && message.Longitude.HasValue)
-                    {
-                        <a href="https://www.google.com/maps?q=@(message.Latitude),@(message.Longitude)" target="_blank">
-                            @message.Latitude, @message.Longitude
-                        </a>
-                    }
-                    else
-                    {
-                        @: Не указана
-                    }
-                </td>
-                <td>@message.MessageText</td>
-            </tr>
+            <div class="alert-success">
+                @TempData["Message"]
+            </div>
         }
-        </tbody>
-    </table>
 
-    <form id="clear-form" asp-action="ClearHelpMessages" asp-controller="Admin" method="post">
-        @Html.AntiForgeryToken()
-        <button type="button" onclick="submitClearForm()" class="btn btn-danger">Очистить</button>
-    </form>
-
-    <script>
-        function submitClearForm() {
-            var form = document.getElementById('clear-form');
-            var token = form.querySelector('input[name="__RequestVerificationToken"]').value;
-            fetch('/Admin/ClearHelpMessages', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'X-CSRF-TOKEN': token
-                },
-                body: '__RequestVerificationToken=' + encodeURIComponent(token)
-            })
-                .then(response => {
-                    if (response.ok) {
-                        window.location.href = '/Admin/HelpMessages';
-                    } else {
-                        return response.text().then(text => { throw new Error(text); });
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Ошибка при очистке: ' + error.message);
-                });
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert-danger">
+                @TempData["Error"]
+            </div>
         }
-    </script>
-}
-else
-{
-    <p>Сообщений помощи пока нет.</p>
-}
 
-<a asp-action="Index" class="btn btn-primary mt-3">Назад</a>
+        @if (Model.Any())
+        {
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ФИО</th>
+                    <th>Время (UTC)</th>
+                    <th>Геолокация</th>
+                    <th>Сообщение</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var message in Model)
+                {
+                    <tr>
+                        <td>@message.StudentFullName</td>
+                        <td>@message.SentAt.ToString("HH:mm:ss")</td>
+                        <td>
+                            @if (message.Latitude.HasValue && message.Longitude.HasValue)
+                            {
+                                <a href="https://www.google.com/maps?q=@(message.Latitude),@(message.Longitude)" target="_blank">
+                                    @message.Latitude, @message.Longitude
+                                </a>
+                            }
+                            else
+                            {
+                                @: Не указана
+                            }
+                        </td>
+                        <td>@message.MessageText</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+
+            <form id="clear-form" asp-action="ClearHelpMessages" asp-controller="Admin" method="post">
+                @Html.AntiForgeryToken()
+                <button type="button" onclick="submitClearForm()" class="clear-button">Очистить</button>
+            </form>
+
+            <script>
+                function submitClearForm() {
+                    var form = document.getElementById('clear-form');
+                    var token = form.querySelector('input[name="__RequestVerificationToken"]').value;
+                    fetch('/Admin/ClearHelpMessages', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'X-CSRF-TOKEN': token
+                        },
+                        body: '__RequestVerificationToken=' + encodeURIComponent(token)
+                    })
+                        .then(response => {
+                            if (response.ok) {
+                                window.location.href = '/Admin/HelpMessages';
+                            } else {
+                                return response.text().then(text => { throw new Error(text); });
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Ошибка при очистке: ' + error.message);
+                        });
+                }
+            </script>
+        }
+        else
+        {
+            <p class="no-messages">Сообщений помощи пока нет.</p>
+        }
+
+        <a asp-action="Index" class="back-button">Назад</a>
+    </div>
+</div>

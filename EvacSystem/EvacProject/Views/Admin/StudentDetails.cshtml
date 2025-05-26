@@ -1,0 +1,72 @@
+﻿@model EvacProject.GENERAL.Entity.Student
+
+@{
+    ViewData["Title"] = "Детали студента";
+}
+
+<head>
+    <link href="~/css/StudentDetail.css" rel="stylesheet" asp-append-version="true">
+</head>
+
+<div class="admin-container">
+    <nav class="admin-nav">
+        <a href="/Admin/Index">Панель администратора</a>
+        <a href="/Admin/HelpMessages">Сообщения помощи</a>
+        <a href="/Admin/StudentManagement" class="active">Управление студентами</a>
+    </nav>
+
+    <div class="admin-card">
+        <h2>Детали студента</h2>
+
+        <div class="detail-item">
+            <label>ФИО:</label>
+            <span>@Model.LastName @Model.FirstName @Model.Patronymic</span>
+        </div>
+        <div class="detail-item">
+            <label>Номер студента:</label>
+            <span>@Model.StudentNumber</span>
+        </div>
+        <div class="detail-item">
+            <label>Факультет:</label>
+            <span>@Model.Faculty?.Name</span>
+        </div>
+        <div class="detail-item">
+            <label>Форма обучения:</label>
+            <span>@Model.FormOfStudy?.Name</span>
+        </div>
+        <div class="detail-item">
+            <label>Дата поступления:</label>
+            <span>@(Model.AdmissionDate?.ToString("dd.MM.yyyy") ?? "Не указана")</span>
+        </div>
+        <div class="detail-item">
+            <label>Дата выдачи билета:</label>
+            <span>@(Model.TicketIssueDate?.ToString("dd.MM.yyyy") ?? "Не указана")</span>
+        </div>
+        <div class="detail-item">
+            <label>Дата истечения билета:</label>
+            <span>@(Model.TicketExpiryDate?.ToString("dd.MM.yyyy") ?? "Не указана")</span>
+        </div>
+        <div class="detail-item">
+            <label>Telegram Chat ID:</label>
+            <span>@(Model.TelegramChatId ?? "Не указан")</span>
+        </div>
+        <div class="detail-item">
+            <label>Текущее состояние:</label>
+            <span>@Model.CurrentState</span>
+        </div>
+        <div class="detail-item">
+            <label>Выбранный кампус:</label>
+            <span>@Model.SelectedCampus</span>
+        </div>
+
+        <div>
+            <a href="/Admin/EditStudent/@Model.UserId" class="action-button edit-button">Редактировать</a>
+            <form asp-action="DeleteStudent" asp-controller="Admin" method="post" action="/Admin/DeleteStudent" style="display:inline;">
+                <input type="hidden" name="id" value="@Model.UserId" />
+                @Html.AntiForgeryToken()
+                <button type="submit" class="action-button delete-button" onclick="return confirm('Вы уверены, что хотите удалить студента?')">Удалить</button>
+            </form>
+            <a href="/Admin/StudentManagement" class="back-button">Назад</a>
+        </div>
+    </div>
+</div>

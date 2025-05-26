@@ -139,4 +139,12 @@ C:\Diploma\EvacSystem\EvacProject\obj\Debug\net9.0\compressed\srg5x2zryf-afl7z0x
 C:\Diploma\EvacSystem\EvacProject\obj\Debug\net9.0\compressed\p6zwelv5d6-ls45c2unjd.gz
 C:\Diploma\EvacSystem\EvacProject\obj\Debug\net9.0\compressed\rb52iwhzjk-ibvndv91ph.gz
 C:\Diploma\EvacSystem\EvacProject\obj\Debug\net9.0\compressed\hq1dzla4b6-9lce5x6lk1.gz
+C:\Diploma\EvacSystem\EvacProject\obj\Debug\net9.0\compressed\is7cwoxejx-edwbs3jz96.gz
+C:\Diploma\EvacSystem\EvacProject\obj\Debug\net9.0\compressed\jkgirv3dj4-moszsvz95r.gz
+C:\Diploma\EvacSystem\EvacProject\obj\Debug\net9.0\compressed\kx0eowvowl-kp9h98w3gi.gz
+C:\Diploma\EvacSystem\EvacProject\obj\Debug\net9.0\compressed\2lbi2sl0ur-qszyczxu0n.gz
+C:\Diploma\EvacSystem\EvacProject\obj\Debug\net9.0\compressed\1y5ijga2k8-ab71leavbs.gz
+C:\Diploma\EvacSystem\EvacProject\obj\Debug\net9.0\compressed\fmmw3uxd5r-ab71leavbs.gz
+C:\Diploma\EvacSystem\EvacProject\obj\Debug\net9.0\compressed\pa5po625uy-yne4xe871x.gz
+C:\Diploma\EvacSystem\EvacProject\obj\Debug\net9.0\compressed\ejfcq2k0he-e0jw4jjhga.gz
 C:\Diploma\EvacSystem\EvacProject\obj\Debug\net9.0\compressed\aiic1tdghp-0g90l3bkhw.gz

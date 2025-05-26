@@ -1,0 +1,127 @@
+﻿.admin-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.admin-nav {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    background-color: #ffffff;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.admin-nav a {
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    color: #4361ee;
+    font-weight: 500;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.admin-nav a:hover, .admin-nav a.active {
+    background-color: #4361ee;
+    color: #ffffff;
+}
+
+.admin-card {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.admin-card h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.detail-item {
+    margin-bottom: 1rem;
+}
+
+.detail-item label {
+    font-weight: 600;
+    color: #555;
+    display: inline-block;
+    width: 200px;
+}
+
+.detail-item span {
+    color: #333;
+}
+
+.action-button {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 0.5rem;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.edit-button {
+    background-color: #f72585;
+    color: #ffffff;
+}
+
+.edit-button:hover {
+    background-color: #d81b60;
+}
+
+.delete-button {
+    background-color: #ef233c;
+    color: #ffffff;
+}
+
+.delete-button:hover {
+    background-color: #d32f2f;
+}
+
+.back-button {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background-color: #4361ee;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #3a0ca3;
+}
+
+@media (max-width: 768px) {
+    .admin-nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .admin-nav a {
+        width: 100%;
+        text-align: center;
+    }
+
+    .admin-card {
+        padding: 1rem;
+    }
+
+    .detail-item label {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+}

@@ -6,6 +6,8 @@ using EvacProject.Services;
 using Microsoft.Extensions.Logging;
 using System.Linq;
 using System;
+using EvacProject.GENERAL.Entity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EvacProject.Controllers
 {
@@ -147,6 +149,218 @@ namespace EvacProject.Controllers
             }
             _logger.LogInformation("ClearHelpMessages: Redirecting to HelpMessages");
             return RedirectToAction("HelpMessages");
+        }
+        
+        [HttpGet]
+        public async Task<IActionResult> StudentManagement()
+        {
+            _logger.LogInformation("AdminController: StudentManagement called");
+            if (HttpContext.Session.GetString("AdminAuthenticated") != "true")
+            {
+                _logger.LogWarning("StudentManagement: Session invalid, redirecting to Login");
+                return RedirectToAction("Login");
+            }
+
+            var students = await _dbContext.Students
+                .Include(s => s.Faculty)
+                .Include(s => s.FormOfStudy)
+                .OrderBy(s => s.LastName)
+                .ThenBy(s => s.FirstName)
+                .ToListAsync();
+            return View(students);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> StudentDetails(long id)
+        {
+            _logger.LogInformation("AdminController: StudentDetails called with UserId={id}", id);
+            if (HttpContext.Session.GetString("AdminAuthenticated") != "true")
+            {
+                _logger.LogWarning("StudentDetails: Session invalid, redirecting to Login");
+                return RedirectToAction("Login");
+            }
+
+            var student = await _dbContext.Students
+                .Include(s => s.Faculty)
+                .Include(s => s.FormOfStudy)
+                .FirstOrDefaultAsync(s => s.UserId == id);
+            if (student == null)
+            {
+                _logger.LogWarning("Student not found with UserId={id}", id);
+                return NotFound();
+            }
+            return View(student);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> CreateStudent()
+        {
+            _logger.LogInformation("AdminController: CreateStudent called");
+            if (HttpContext.Session.GetString("AdminAuthenticated") != "true")
+            {
+                _logger.LogWarning("CreateStudent: Session invalid, redirecting to Login");
+                return RedirectToAction("Login");
+            }
+
+            ViewBag.Faculties = await _dbContext.Faculties
+                .Select(f => new SelectListItem { Value = f.FacultyId.ToString(), Text = f.Name })
+                .ToListAsync();
+            ViewBag.FormsOfStudy = await _dbContext.FormsOfStudy
+                .Select(f => new SelectListItem { Value = f.FormOfStudyId.ToString(), Text = f.Name })
+                .ToListAsync();
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateStudent(Student student)
+        {
+            _logger.LogInformation("AdminController: CreateStudent POST called");
+            if (HttpContext.Session.GetString("AdminAuthenticated") != "true")
+            {
+                _logger.LogWarning("CreateStudent: Session invalid, redirecting to Login");
+                return RedirectToAction("Login");
+            }
+
+            // Преобразуем даты в UTC
+            if (student.AdmissionDate.HasValue)
+                student.AdmissionDate = DateTime.SpecifyKind(student.AdmissionDate.Value, DateTimeKind.Utc);
+            if (student.TicketIssueDate.HasValue)
+                student.TicketIssueDate = DateTime.SpecifyKind(student.TicketIssueDate.Value, DateTimeKind.Utc);
+            if (student.TicketExpiryDate.HasValue)
+                student.TicketExpiryDate = DateTime.SpecifyKind(student.TicketExpiryDate.Value, DateTimeKind.Utc);
+
+            if (ModelState.IsValid)
+            {
+                _dbContext.Students.Add(student);
+                await _dbContext.SaveChangesAsync();
+                _logger.LogInformation("Student created successfully, UserId={id}", student.UserId);
+                TempData["Message"] = "Студент успешно добавлен.";
+                return RedirectToAction("StudentManagement");
+            }
+
+            ViewBag.Faculties = await _dbContext.Faculties
+                .Select(f => new SelectListItem { Value = f.FacultyId.ToString(), Text = f.Name })
+                .ToListAsync();
+            ViewBag.FormsOfStudy = await _dbContext.FormsOfStudy
+                .Select(f => new SelectListItem { Value = f.FormOfStudyId.ToString(), Text = f.Name })
+                .ToListAsync();
+            return View(student);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditStudent(long id)
+        {
+            _logger.LogInformation("AdminController: EditStudent called with UserId={id}", id);
+            if (HttpContext.Session.GetString("AdminAuthenticated") != "true")
+            {
+                _logger.LogWarning("EditStudent: Session invalid, redirecting to Login");
+                return RedirectToAction("Login");
+            }
+
+            var student = await _dbContext.Students
+                .FirstOrDefaultAsync(s => s.UserId == id);
+            if (student == null)
+            {
+                _logger.LogWarning("Student not found with UserId={id}", id);
+                return NotFound();
+            }
+
+            ViewBag.Faculties = await _dbContext.Faculties
+                .Select(f => new SelectListItem { Value = f.FacultyId.ToString(), Text = f.Name })
+                .ToListAsync();
+            ViewBag.FormsOfStudy = await _dbContext.FormsOfStudy
+                .Select(f => new SelectListItem { Value = f.FormOfStudyId.ToString(), Text = f.Name })
+                .ToListAsync();
+            return View(student);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditStudent(Student student)
+        {
+            _logger.LogInformation("AdminController: EditStudent POST called with UserId={id}", student.UserId);
+            if (HttpContext.Session.GetString("AdminAuthenticated") != "true")
+            {
+                _logger.LogWarning("EditStudent: Session invalid, redirecting to Login");
+                return RedirectToAction("Login");
+            }
+
+            // Преобразуем даты в UTC
+            if (student.AdmissionDate.HasValue)
+                student.AdmissionDate = DateTime.SpecifyKind(student.AdmissionDate.Value, DateTimeKind.Utc);
+            if (student.TicketIssueDate.HasValue)
+                student.TicketIssueDate = DateTime.SpecifyKind(student.TicketIssueDate.Value, DateTimeKind.Utc);
+            if (student.TicketExpiryDate.HasValue)
+                student.TicketExpiryDate = DateTime.SpecifyKind(student.TicketExpiryDate.Value, DateTimeKind.Utc);
+
+            if (ModelState.IsValid)
+            {
+                var existingStudent = await _dbContext.Students.FindAsync(student.UserId);
+                if (existingStudent == null)
+                {
+                    _logger.LogWarning("Student not found with UserId={id}", student.UserId);
+                    return NotFound();
+                }
+
+                existingStudent.FirstName = student.FirstName;
+                existingStudent.LastName = student.LastName;
+                existingStudent.Patronymic = student.Patronymic;
+                existingStudent.StudentNumber = student.StudentNumber;
+                existingStudent.FacultyId = student.FacultyId;
+                existingStudent.FormOfStudyId = student.FormOfStudyId;
+                existingStudent.AdmissionDate = student.AdmissionDate;
+                existingStudent.TicketIssueDate = student.TicketIssueDate;
+                existingStudent.TicketExpiryDate = student.TicketExpiryDate;
+                existingStudent.TelegramChatId = student.TelegramChatId;
+                existingStudent.CurrentState = student.CurrentState;
+                existingStudent.SelectedCampus = student.SelectedCampus;
+
+                await _dbContext.SaveChangesAsync();
+                _logger.LogInformation("Student updated successfully, UserId={id}", student.UserId);
+                TempData["Message"] = "Данные студента успешно обновлены.";
+                return RedirectToAction("StudentManagement");
+            }
+
+            ViewBag.Faculties = await _dbContext.Faculties
+                .Select(f => new SelectListItem { Value = f.FacultyId.ToString(), Text = f.Name })
+                .ToListAsync();
+            ViewBag.FormsOfStudy = await _dbContext.FormsOfStudy
+                .Select(f => new SelectListItem { Value = f.FormOfStudyId.ToString(), Text = f.Name })
+                .ToListAsync();
+            return View(student);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteStudent(long id)
+        {
+            _logger.LogInformation("AdminController: DeleteStudent called with UserId={id}", id);
+            if (HttpContext.Session.GetString("AdminAuthenticated") != "true")
+            {
+                _logger.LogWarning("DeleteStudent: Session invalid, redirecting to Login");
+                return RedirectToAction("Login");
+            }
+
+            var student = await _dbContext.Students.FindAsync(id);
+            if (student == null)
+            {
+                _logger.LogWarning("Student not found with UserId={id}", id);
+                TempData["Error"] = "Студент не найден.";
+                return RedirectToAction("StudentManagement");
+            }
+
+            try
+            {
+                _dbContext.Students.Remove(student);
+                await _dbContext.SaveChangesAsync();
+                _logger.LogInformation("Student deleted successfully, UserId={id}", id);
+                TempData["Message"] = "Студент успешно удален.";
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error deleting student with UserId={id}", id);
+                TempData["Error"] = "Ошибка при удалении студента.";
+            }
+            return RedirectToAction("StudentManagement");
         }
     }
 }

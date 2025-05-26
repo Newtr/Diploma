@@ -1,0 +1,103 @@
+﻿@model EvacProject.GENERAL.Entity.Student
+
+@{
+    ViewData["Title"] = "Добавить студента";
+}
+
+<head>
+    <link href="~/css/CreateStudent.css" rel="stylesheet" asp-append-version="true">
+</head>
+
+<div class="admin-container">
+    <nav class="admin-nav">
+        <a href="/Admin/Index">Панель администратора</a>
+        <a href="/Admin/HelpMessages">Сообщения помощи</a>
+        <a href="/Admin/StudentManagement" class="active">Управление студентами</a>
+    </nav>
+
+    <div class="admin-card">
+        <h2>Добавить студента</h2>
+
+        <form method="post" asp-action="CreateStudent" asp-controller="Admin">
+            <div class="form-group">
+                <label for="firstName">Имя</label>
+                <input type="text" id="firstName" name="FirstName" required class="form-control" />
+                <span asp-validation-for="FirstName" class="error-message"></span>
+            </div>
+            <div class="form-group">
+                <label for="lastName">Фамилия</label>
+                <input type="text" id="lastName" name="LastName" required class="form-control" />
+                <span asp-validation-for="LastName" class="error-message"></span>
+            </div>
+            <div class="form-group">
+                <label for="patronymic">Отчество</label>
+                <input type="text" id="patronymic" name="Patronymic" class="form-control" />
+                <span asp-validation-for="Patronymic" class="error-message"></span>
+            </div>
+            <div class="form-group">
+                <label for="studentNumber">Номер студента</label>
+                <input type="text" id="studentNumber" name="StudentNumber" required maxlength="8" class="form-control" />
+                <span asp-validation-for="StudentNumber" class="error-message"></span>
+            </div>
+            <div class="form-group">
+                <label for="facultyId">Факультет</label>
+                <select id="facultyId" name="FacultyId" required class="form-control">
+                    <option value="">Выберите факультет</option>
+                    @foreach (var faculty in ViewBag.Faculties)
+                    {
+                        <option value="@faculty.Value">@faculty.Text</option>
+                    }
+                </select>
+                <span asp-validation-for="FacultyId" class="error-message"></span>
+            </div>
+            <div class="form-group">
+                <label for="formOfStudyId">Форма обучения</label>
+                <select id="formOfStudyId" name="FormOfStudyId" required class="form-control">
+                    <option value="">Выберите форму</option>
+                    @foreach (var form in ViewBag.FormsOfStudy)
+                    {
+                        <option value="@form.Value">@form.Text</option>
+                    }
+                </select>
+                <span asp-validation-for="FormOfStudyId" class="error-message"></span>
+            </div>
+            <div class="form-group">
+                <label for="admissionDate">Дата поступления</label>
+                <input type="date" id="admissionDate" name="AdmissionDate" class="form-control" />
+                <span asp-validation-for="AdmissionDate" class="error-message"></span>
+            </div>
+            <div class="form-group">
+                <label for="ticketIssueDate">Дата выдачи билета</label>
+                <input type="date" id="ticketIssueDate" name="TicketIssueDate" class="form-control" />
+                <span asp-validation-for="TicketIssueDate" class="error-message"></span>
+            </div>
+            <div class="form-group">
+                <label for="ticketExpiryDate">Дата истечения билета</label>
+                <input type="date" id="ticketExpiryDate" name="TicketExpiryDate" class="form-control" />
+                <span asp-validation-for="TicketExpiryDate" class="error-message"></span>
+            </div>
+            <div class="form-group">
+                <label for="telegramChatId">Telegram Chat ID</label>
+                <input type="text" id="telegramChatId" name="TelegramChatId" class="form-control" />
+                <span asp-validation-for="TelegramChatId" class="error-message"></span>
+            </div>
+            <div class="form-group">
+                <label for="currentState">Текущее состояние</label>
+                <input type="text" id="currentState" name="CurrentState" maxlength="50" class="form-control" />
+                <span asp-validation-for="CurrentState" class="error-message"></span>
+            </div>
+            <div class="form-group">
+                <label for="selectedCampus">Выбранный кампус</label>
+                <input type="text" id="selectedCampus" name="SelectedCampus" maxlength="10" class="form-control" />
+                <span asp-validation-for="SelectedCampus" class="error-message"></span>
+            </div>
+            <button type="submit" class="submit-button">Сохранить</button>
+            <a href="/Admin/StudentManagement" class="back-button">Отмена</a>
+        </form>
+    </div>
+</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+}

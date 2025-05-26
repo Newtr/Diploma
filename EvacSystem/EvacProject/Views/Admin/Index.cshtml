@@ -1,21 +1,39 @@
-﻿<h2>Панель администратора</h2>
-
-@if (ViewBag.Message != null)
-{
-    <div style="color: green; margin-bottom: 10px;">
-        @ViewBag.Message
-    </div>
+﻿@{
+    ViewData["Title"] = "Панель администратора";
 }
 
-@if (ViewBag.Error != null)
-{
-    <div style="color: red; margin-bottom: 10px;">
-        @ViewBag.Error
+<head>
+    <link href="~/css/AdminPanel.css" rel="stylesheet" asp-append-version="true">
+</head>
+
+<div class="admin-container">
+    <nav class="admin-nav">
+        <a href="/Admin/Index" class="active">Панель администратора</a>
+        <a href="/Admin/HelpMessages">Сообщения помощи</a>
+        <a href="/Admin/StudentManagement">Управление студентами</a>
+    </nav>
+
+    <div class="admin-card">
+        <h2>Панель администратора</h2>
+
+        @if (ViewBag.Message != null)
+        {
+            <div class="alert-success">
+                @ViewBag.Message
+            </div>
+        }
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert-danger">
+                @ViewBag.Error
+            </div>
+        }
+
+        <form method="post" action="/Admin/SimulateEmergency" class="admin-form">
+            <button type="submit" class="admin-button">Симуляция ЧС</button>
+        </form>
+
+        <a href="/Admin/HelpMessages" class="admin-link">Просмотреть сообщения о помощи</a>
     </div>
-}
-
-<form method="post" action="/Admin/SimulateEmergency">
-    <button type="submit">Симуляция ЧС</button>
-</form>
-
-<a href="/Admin/HelpMessages">Просмотреть сообщения о помощи</a>
+</div>
