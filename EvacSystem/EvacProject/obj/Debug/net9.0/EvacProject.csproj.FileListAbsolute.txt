@@ -135,3 +135,8 @@ C:\Diploma\EvacSystem\EvacProject\obj\Debug\net9.0\EvacProject.MvcApplicationPar
 C:\Diploma\EvacSystem\EvacProject\bin\Debug\net9.0\Newtonsoft.Json.dll
 C:\Diploma\EvacSystem\EvacProject\bin\Debug\net9.0\News.json
 C:\Diploma\EvacSystem\EvacProject\bin\Debug\net9.0\subscribers.json
+C:\Diploma\EvacSystem\EvacProject\obj\Debug\net9.0\compressed\srg5x2zryf-afl7z0xww3.gz
+C:\Diploma\EvacSystem\EvacProject\obj\Debug\net9.0\compressed\p6zwelv5d6-ls45c2unjd.gz
+C:\Diploma\EvacSystem\EvacProject\obj\Debug\net9.0\compressed\rb52iwhzjk-ibvndv91ph.gz
+C:\Diploma\EvacSystem\EvacProject\obj\Debug\net9.0\compressed\hq1dzla4b6-9lce5x6lk1.gz
+C:\Diploma\EvacSystem\EvacProject\obj\Debug\net9.0\compressed\aiic1tdghp-0g90l3bkhw.gz

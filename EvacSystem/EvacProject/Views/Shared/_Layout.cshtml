@@ -1,15 +1,79 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-    <meta charset="utf-8" />
-    <title>@ViewData["Title"] - EvacSystem</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - МЧС БГТУ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="/css/site.css" rel="stylesheet">
 </head>
-<body>
-<div class="container">
+<body class="bg-white text-gray-900">
+<header class="fixed top-0 left-0 w-full bg-white shadow-md z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between py-4">
+        <a href="/" class="flex items-center">
+            <img src="/images/logo.png" alt="МЧС БГТУ" class="h-12 w-auto">
+        </a>
+        <nav class="hidden lg:flex space-x-6">
+            <a href="/Home/About" class="text-gray-700 hover:text-red-600 font-medium">Об университете</a>
+            <a href="/Home/Documents" class="text-gray-700 hover:text-red-600 font-medium">Документы</a>
+            <a href="/Home/Contacts" class="text-gray-700 hover:text-red-600 font-medium">Контакты</a>
+            <a href="/Home/Map" class="text-gray-700 hover:text-red-600 font-medium">Интерактивная карта</a>
+            <a href="/Home/Simulator" class="text-gray-700 hover:text-red-600 font-medium">Симулятор ЧС</a>
+        </nav>
+        <button id="menu-toggle" class="lg:hidden text-gray-600 focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+        </button>
+    </div>
+    <nav id="mobile-menu" class="hidden lg:hidden bg-white shadow-md">
+        <a href="/Home/About" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Об университете</a>
+        <a href="/Home/Documents" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Документы</a>
+        <a href="/Home/Contacts" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Контакты</a>
+        <a href="/Home/Map" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Интерактивная карта</a>
+        <a href="/Home/Simulator" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Симулятор ЧС</a>
+    </nav>
+</header>
+
+<main class="pt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen">
     @RenderBody()
-</div>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</main>
+
+<footer class="bg-gray-100 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <h3 class="text-lg font-semibold text-gray-900">Контакты</h3>
+                <p class="mt-2 text-gray-600">220006, г. Минск, ул. Свердлова, 13а</p>
+                <p class="mt-1 text-gray-600">Телефон: +375 (17) 327-71-31</p>
+                <p class="mt-1 text-gray-600">Email: info@belstu.by</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold text-gray-900">Социальные сети</h3>
+                <div class="mt-2 flex space-x-4">
+                    <a href="https://t.me/belstu_by" target="_blank" class="text-gray-600 hover:text-red-600">
+                        <img src="/icons/telegram.svg" alt="Telegram" class="h-6 w-6">
+                    </a>
+                    <a href="https://vk.com/belstu_by" target="_blank" class="text-gray-600 hover:text-red-600">
+                        <img src="/icons/vk.svg" alt="VK" class="h-6 w-6">
+                    </a>
+                    <a href="https://www.youtube.com/bstuminsk" target="_blank" class="text-gray-600 hover:text-red-600">
+                        <img src="/icons/youtube.svg" alt="YouTube" class="h-6 w-6">
+                    </a>
+                </div>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold text-gray-900">Информация</h3>
+                <p class="mt-2 text-gray-600">
+                    <a href="https://belstu.by" target="_blank" class="text-red-600 hover:underline">belstu.by</a>
+                </p>
+                <p class="mt-1 text-gray-600">© 2025 БГТУ. Все права защищены.</p>
+                <p class="mt-1 text-gray-600">Разработано отделом МЧС БГТУ</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="/js/site.js"></script>
 </body>
 </html>

@@ -1,0 +1,232 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Интерактивная карта";
+}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <title>Интерактивная карта с безопасными маршрутами</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGZIul-FiQBCypdWJsez87JrtRAFa1WYM&libraries=geometry"></script>
+    <style>
+        #map {
+            height: 600px;
+            width: 70%;
+            float: left;
+        }
+        .legend {
+            float: right;
+            width: 25%;
+            margin: 10px;
+            padding: 10px;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+        }
+        .controls {
+            margin-top: 20px;
+            text-align: center;
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <div class="legend">
+        <h3>Легенда</h3>
+        <ul>
+            <li><span style="color: #FF0000;">■</span> Высокая температура (>30°C)</li>
+            <li><span style="color: #808080;">■</span> Низкая температура (&lt;0°C)</li>
+        </ul>
+    </div>
+    <div class="controls">
+        <input id="start" type="text" placeholder="Точка А" />
+        <input id="end" type="text" placeholder="Точка Б" />
+        <button onclick="calculateRoute()">Построить маршрут</button>
+        <p id="routeInfo"></p>
+    </div>
+
+    <script>
+        let map;
+        let directionsService, directionsRenderer;
+        let dangerZones = [];
+        const apiKey = "ab3a442e3e33cb52dda464f495110325";
+        const weatherUrl = "http://api.openweathermap.org/data/2.5/weather";
+        const cities = [
+            { name: "Минск", lat: 53.9, lng: 27.5667 },
+            { name: "Брест", lat: 52.0976, lng: 23.7341 },
+            { name: "Витебск", lat: 55.1904, lng: 30.2049 },
+            { name: "Гомель", lat: 52.4412, lng: 30.9823 },
+            { name: "Могилёв", lat: 53.9007, lng: 30.3314 }
+        ];
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 7,
+                center: { lat: 53.7098, lng: 27.9534 }
+            });
+
+            directionsService = new google.maps.DirectionsService();
+            directionsRenderer = new google.maps.DirectionsRenderer();
+            directionsRenderer.setMap(map);
+
+            fetchWeatherData();
+            addDemoZones();
+        }
+
+        async function fetchWeatherData() {
+            for (let city of cities) {
+                const url = `${weatherUrl}?lat=${city.lat}&lon=${city.lng}&appid=${apiKey}&units=metric`;
+                try {
+                    const response = await fetch(url);
+                    const data = await response.json();
+                    const dangerType = getDangerType(data);
+                    if (dangerType) {
+                        createDangerZone(city, dangerType);
+                    }
+                } catch (error) {
+                    console.error(`Ошибка при получении данных для ${city.name}:`, error);
+                }
+            }
+        }
+
+        function getDangerType(weatherData) {
+            const temp = weatherData.main.temp;
+            if (temp > 30) return "highTemp";
+            if (temp < 0) return "lowTemp";
+            return null;
+        }
+
+        function createDangerZone(city, dangerType) {
+            const color = dangerType === "highTemp" ? "#FF0000" : "#808080";
+            const zone = new google.maps.Circle({
+                strokeColor: color,
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: color,
+                fillOpacity: 0.35,
+                map: map,
+                center: { lat: city.lat, lng: city.lng },
+                radius: 50000 
+            });
+            dangerZones.push({ polygon: zone, type: dangerType });
+        }
+
+        function addDemoZones() {
+            // Пример зоны с высокой температурой (Гомель)
+            const gomelHighTemp = new google.maps.Circle({
+                strokeColor: "#FF0000",
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: "#FF0000",
+                fillOpacity: 0.35,
+                map: map,
+                center: { lat: 52.4412, lng: 30.9823 },
+                radius: 50000
+            });
+            dangerZones.push({ polygon: gomelHighTemp, type: "highTemp" });
+
+            // Пример зоны с низкой температурой (Витебск)
+            const vitebskLowTemp = new google.maps.Circle({
+                strokeColor: "#808080",
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: "#808080",
+                fillOpacity: 0.35,
+                map: map,
+                center: { lat: 55.1904, lng: 30.2049 },
+                radius: 50000
+            });
+            dangerZones.push({ polygon: vitebskLowTemp, type: "lowTemp" });
+        }
+
+        function calculateRoute() {
+            const start = document.getElementById("start").value;
+            const end = document.getElementById("end").value;
+
+            const request = {
+                origin: start,
+                destination: end,
+                travelMode: google.maps.TravelMode.DRIVING
+            };
+
+            directionsService.route(request, (result, status) => {
+                if (status === google.maps.DirectionsStatus.OK) {
+                    const endLocation = result.routes[0].legs[0].end_location;
+                    if (isInDangerZone(endLocation)) {
+                        document.getElementById("routeInfo").innerHTML = `
+                            Точка Б находится в опасной зоне!<br>
+                            <button onclick="buildDangerRoute('${start}', '${end}')">Проложить в опасную зону</button>
+                            <button onclick="offerSafeRoute('${start}', ${endLocation.lat()}, ${endLocation.lng()})">Выбрать безопасный маршрут</button>
+                        `;
+                    } else {
+                        directionsRenderer.setDirections(result);
+                        document.getElementById("routeInfo").innerHTML = "Маршрут построен в безопасную зона.";
+                    }
+                } else {
+                    alert("Не удалось построить маршрут.");
+                }
+            });
+        }
+
+        function isInDangerZone(location) {
+            for (let zone of dangerZones) {
+                const distance = google.maps.geometry.spherical.computeDistanceBetween(location, zone.polygon.getCenter());
+                if (distance < zone.polygon.getRadius()) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function buildDangerRoute(start, end) {
+            const request = {
+                origin: start,
+                destination: end,
+                travelMode: google.maps.TravelMode.DRIVING
+            };
+            directionsService.route(request, (result, status) => {
+                if (status === google.maps.DirectionsStatus.OK) {
+                    directionsRenderer.setDirections(result);
+                    document.getElementById("routeInfo").innerHTML = "Маршрут проложен в опасную зону.";
+                }
+            });
+        }
+
+        function offerSafeRoute(start, lat, lng) {
+            const endLocation = new google.maps.LatLng(lat, lng);
+            const safePoint = findNearbySafePoint(endLocation);
+
+            if (safePoint) {
+                const safeRequest = {
+                    origin: start,
+                    destination: safePoint,
+                    travelMode: google.maps.TravelMode.DRIVING
+                };
+                directionsService.route(safeRequest, (result, status) => {
+                    if (status === google.maps.DirectionsStatus.OK) {
+                        directionsRenderer.setDirections(result);
+                        document.getElementById("routeInfo").innerHTML = "Предложен безопасный маршрут.";
+                    }
+                });
+            } else {
+                alert("Не удалось найти безопасную зону.");
+            }
+        }
+
+        function findNearbySafePoint(location, step = 1000, maxRadius = 50000) {
+            for (let radius = step; radius <= maxRadius; radius += step) {
+                const safePoint = new google.maps.LatLng(
+                    location.lat() + (radius / 111000),
+                    location.lng() + (radius / (111000 * Math.cos(location.lat() * Math.PI / 180))) // Смещение по долготе
+                );
+                if (!isInDangerZone(safePoint)) {
+                    return safePoint;
+                }
+            }
+            return null;
+        }
+
+        window.onload = initMap;
+    </script>
+</body>
+</html>

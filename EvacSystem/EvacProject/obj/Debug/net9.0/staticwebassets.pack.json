@@ -81,6 +81,42 @@
       "PackagePath": "staticwebassets\\EvacuationPlans\\Campus_4\\Flor_5.png"
     },
     {
+      "Id": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\documents\\emergency-procedures.pdf",
+      "PackagePath": "staticwebassets\\documents\\emergency-procedures.pdf"
+    },
+    {
+      "Id": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\documents\\evacuation-plan.pdf",
+      "PackagePath": "staticwebassets\\documents\\evacuation-plan.pdf"
+    },
+    {
+      "Id": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\documents\\safety-guide.pdf",
+      "PackagePath": "staticwebassets\\documents\\safety-guide.pdf"
+    },
+    {
+      "Id": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\icons\\telegram.svg",
+      "PackagePath": "staticwebassets\\icons\\telegram.svg"
+    },
+    {
+      "Id": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\icons\\vk.svg",
+      "PackagePath": "staticwebassets\\icons\\vk.svg"
+    },
+    {
+      "Id": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\icons\\youtube.svg",
+      "PackagePath": "staticwebassets\\icons\\youtube.svg"
+    },
+    {
+      "Id": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\images\\logo.png",
+      "PackagePath": "staticwebassets\\images\\logo.png"
+    },
+    {
+      "Id": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
       "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.EvacProject.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
     },
