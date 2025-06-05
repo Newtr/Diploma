@@ -100,4 +100,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#studentNumber').on('change', function() {
+                var studentNumber = $(this).val();
+                if (studentNumber) {
+                    $.get('/Admin/CheckStudentNumber', { studentNumber: studentNumber })
+                        .done(function(exists) {
+                            if (exists) {
+                                $('.student-number-error').remove();
+                                $('#studentNumber').after('<span class="error-message student-number-error">Студент с таким номером уже существует</span>');
+                            } else {
+                                $('.student-number-error').remove();
+                            }
+                        });
+                }
+            });
+        });
+</script>
 }

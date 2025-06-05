@@ -8,7 +8,6 @@
 
     <ItemGroup>
       <Folder Include="Migrations\" />
-      <Folder Include="WEB\" />
       <Folder Include="wwwroot\documents\" />
       <Folder Include="wwwroot\EvacuationPlans\Campus_1\" />
       <Folder Include="wwwroot\EvacuationPlans\Campus_2\" />

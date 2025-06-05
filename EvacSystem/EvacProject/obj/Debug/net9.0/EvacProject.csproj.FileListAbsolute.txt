@@ -148,3 +148,4 @@ C:\Diploma\EvacSystem\EvacProject\obj\Debug\net9.0\compressed\fmmw3uxd5r-ab71lea
 C:\Diploma\EvacSystem\EvacProject\obj\Debug\net9.0\compressed\pa5po625uy-yne4xe871x.gz
 C:\Diploma\EvacSystem\EvacProject\obj\Debug\net9.0\compressed\ejfcq2k0he-e0jw4jjhga.gz
 C:\Diploma\EvacSystem\EvacProject\obj\Debug\net9.0\compressed\aiic1tdghp-0g90l3bkhw.gz
+C:\Diploma\EvacSystem\EvacProject\obj\Debug\net9.0\compressed\qs9dapmcrj-99jzwa8oqf.gz

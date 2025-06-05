@@ -105,6 +105,10 @@
       "PackagePath": "staticwebassets\\css\\StudentDetail.css"
     },
     {
+      "Id": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\pages.css",
+      "PackagePath": "staticwebassets\\css\\pages.css"
+    },
+    {
       "Id": "C:\\Diploma\\EvacSystem\\EvacProject\\wwwroot\\css\\simulator.css",
       "PackagePath": "staticwebassets\\css\\simulator.css"
     },

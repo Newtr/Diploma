@@ -2,11 +2,43 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Документы";
 }
-<div class="py-8">
-    <h1 class="text-3xl font-bold text-gray-900">Документы</h1>
-    <ul class="mt-4 text-lg text-gray-700 list-disc pl-5">
-        <li><a href="/documents/safety-guide.pdf" class="text-red-600 hover:underline">Руководство по безопасности</a></li>
-        <li><a href="/documents/evacuation-plan.pdf" class="text-red-600 hover:underline">План эвакуации</a></li>
-        <li><a href="/documents/emergency-procedures.pdf" class="text-red-600 hover:underline">Процедуры ЧС</a></li>
-    </ul>
+
+<link href="~/css/pages.css" rel="stylesheet" />
+
+<div class="content-section">
+    <h1 class="page-title">Документы</h1>
+
+    <div class="content-block">
+        <h2 class="section-title">Основные документы</h2>
+        <ul class="mt-4 text-lg text-gray-700 list-disc pl-5">
+            <li><a href="/documents/safety-guide.pdf" class="text-red-600 hover:underline">Руководство по безопасности</a></li>
+            <li><a href="/documents/evacuation-plan.pdf" class="text-red-600 hover:underline">План эвакуации</a></li>
+            <li><a href="/documents/emergency-procedures.pdf" class="text-red-600 hover:underline">Процедуры ЧС</a></li>
+        </ul>
+    </div>
+
+    <div class="content-block">
+        <h2 class="section-title">Дополнительные материалы</h2>
+        <ul class="mt-4 text-lg text-gray-700 list-disc pl-5">
+            <li><a href="/documents/fire-safety-instructions.pdf" class="text-red-600 hover:underline">Инструкции по пожарной безопасности</a></li>
+            <li><a href="/documents/first-aid-guide.pdf" class="text-red-600 hover:underline">Руководство по оказанию первой помощи</a></li>
+            <li><a href="/documents/earthquake-preparedness.pdf" class="text-red-600 hover:underline">Подготовка к землетрясениям</a></li>
+        </ul>
+    </div>
+
+    <div class="content-block">
+        <h2 class="section-title">Нормативные акты</h2>
+        <ul class="mt-4 text-lg text-gray-700 list-disc pl-5">
+            <li><a href="/documents/law-on-emergency-situations.pdf" class="text-red-600 hover:underline">Закон о чрезвычайных ситуациях</a></li>
+            <li><a href="/documents/fire-safety-regulations.pdf" class="text-red-600 hover:underline">Правила пожарной безопасности</a></li>
+        </ul>
+    </div>
+
+    <div class="content-block">
+        <h2 class="section-title">Полезные ссылки</h2>
+        <ul class="mt-4 text-lg text-gray-700 list-disc pl-5">
+            <li><a href="https://mchs.gov.by/" class="text-red-600 hover:underline">Сайт МЧС Республики Беларусь</a></li>
+            <li><a href="https://belstu.by/" class="text-red-600 hover:underline">Сайт БГТУ</a></li>
+        </ul>
+    </div>
 </div>

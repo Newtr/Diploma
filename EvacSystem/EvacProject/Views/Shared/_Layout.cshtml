@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - МЧС БГТУ</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="/css/site.css" rel="stylesheet">
+    @RenderSection("Head", required: false)
 </head>
 <body class="bg-white text-gray-900">
 <header class="fixed top-0 left-0 w-full bg-white shadow-md z-50">
@@ -16,6 +17,8 @@
         <nav class="hidden lg:flex space-x-6">
             <a href="/Home/About" class="text-gray-700 hover:text-red-600 font-medium">Об университете</a>
             <a href="/Home/Documents" class="text-gray-700 hover:text-red-600 font-medium">Документы</a>
+            <a href="/Home/Statistics" class="text-gray-700 hover:text-red-600 font-medium">Статистика</a>
+            <a href="/Home/FAQ" class="text-gray-700 hover:text-red-600 font-medium">FAQ</a>
             <a href="/Home/Contacts" class="text-gray-700 hover:text-red-600 font-medium">Контакты</a>
             <a href="/Home/Map" class="text-gray-700 hover:text-red-600 font-medium">Интерактивная карта</a>
             <a href="/Home/Simulator" class="text-gray-700 hover:text-red-600 font-medium">Симулятор ЧС</a>

@@ -2,231 +2,642 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Интерактивная карта";
 }
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="utf-8" />
-    <title>Интерактивная карта с безопасными маршрутами</title>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGZIul-FiQBCypdWJsez87JrtRAFa1WYM&libraries=geometry"></script>
-    <style>
-        #map {
-            height: 600px;
-            width: 70%;
-            float: left;
-        }
-        .legend {
-            float: right;
-            width: 25%;
-            margin: 10px;
-            padding: 10px;
-            background: #f9f9f9;
-            border: 1px solid #ddd;
-        }
-        .controls {
-            margin-top: 20px;
-            text-align: center;
-            clear: both;
-        }
-    </style>
-</head>
+
+@section Head {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+}
+
 <body>
+<div class="map-container">
+    <div class="map-sidebar">
+        <div class="control-panel">
+            <h2>Построение маршрута</h2>
+            <div class="input-group">
+                <label for="start">Точка отправления</label>
+                <div class="input-with-button">
+                    <input id="start" type="text" placeholder="Выберите точку А" readonly />
+                    <button onclick="enableMarkerPlacement('start')" class="marker-button">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="input-group">
+                <label for="end">Точка назначения</label>
+                <div class="input-with-button">
+                    <input id="end" type="text" placeholder="Выберите точку Б" readonly />
+                    <button onclick="enableMarkerPlacement('end')" class="marker-button">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </button>
+                </div>
+            </div>
+            <button onclick="calculateRoute()" class="route-button">Построить маршрут</button>
+            <div id="routeInfo" class="route-info"></div>
+        </div>
+
+        <div class="legend">
+            <h3>Легенда карты</h3>
+            <div class="legend-item">
+                <span class="legend-color" style="background-color: #FF0000;"></span>
+                <span>Высокая температура (>30°C)</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color" style="background-color: #808080;"></span>
+                <span>Низкая температура (<0°C)</span>
+            </div>
+        </div>
+    </div>
     <div id="map"></div>
-    <div class="legend">
-        <h3>Легенда</h3>
-        <ul>
-            <li><span style="color: #FF0000;">■</span> Высокая температура (>30°C)</li>
-            <li><span style="color: #808080;">■</span> Низкая температура (&lt;0°C)</li>
-        </ul>
-    </div>
-    <div class="controls">
-        <input id="start" type="text" placeholder="Точка А" />
-        <input id="end" type="text" placeholder="Точка Б" />
-        <button onclick="calculateRoute()">Построить маршрут</button>
-        <p id="routeInfo"></p>
-    </div>
+</div>
 
-    <script>
-        let map;
-        let directionsService, directionsRenderer;
-        let dangerZones = [];
-        const apiKey = "ab3a442e3e33cb52dda464f495110325";
-        const weatherUrl = "http://api.openweathermap.org/data/2.5/weather";
-        const cities = [
-            { name: "Минск", lat: 53.9, lng: 27.5667 },
-            { name: "Брест", lat: 52.0976, lng: 23.7341 },
-            { name: "Витебск", lat: 55.1904, lng: 30.2049 },
-            { name: "Гомель", lat: 52.4412, lng: 30.9823 },
-            { name: "Могилёв", lat: 53.9007, lng: 30.3314 }
-        ];
+<style>
+    .map-container {
+        display: flex;
+        gap: 20px;
+        padding: 20px;
+        position: relative;
+        min-height: 600px;
+        margin-bottom: 250px;
+        z-index: 1;
+    }
 
-        function initMap() {
-            map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 7,
-                center: { lat: 53.7098, lng: 27.9534 }
-            });
+    .map-sidebar {
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        position: relative;
+        z-index: 2;
+    }
 
-            directionsService = new google.maps.DirectionsService();
-            directionsRenderer = new google.maps.DirectionsRenderer();
-            directionsRenderer.setMap(map);
+    #map {
+        flex-grow: 1;
+        min-height: 600px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        position: relative;
+        z-index: 1;
+    }
 
-            fetchWeatherData();
-            addDemoZones();
+    .control-panel {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        position: relative;
+        z-index: 2;
+    }
+
+    .control-panel h2 {
+        margin: 0 0 20px 0;
+        font-size: 1.2rem;
+        color: #333;
+    }
+
+    .input-group {
+        margin-bottom: 15px;
+    }
+
+    .input-group label {
+        display: block;
+        margin-bottom: 5px;
+        color: #666;
+    }
+
+    .input-with-button {
+        display: flex;
+        gap: 10px;
+    }
+
+    .input-with-button input {
+        flex-grow: 1;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+
+    .marker-button {
+        padding: 8px 12px;
+        background: #4a90e2;
+        border: none;
+        border-radius: 4px;
+        color: white;
+        cursor: pointer;
+    }
+
+    .marker-button:hover {
+        background: #357abd;
+    }
+
+    .route-button {
+        width: 100%;
+        padding: 10px;
+        background: #2ecc71;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    .route-button:hover {
+        background: #27ae60;
+    }
+
+    .route-info {
+        margin-top: 15px;
+        padding: 10px;
+        background: #f8f9fa;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+
+    .legend {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        position: relative;
+        z-index: 2;
+    }
+
+    .legend h3 {
+        margin: 0 0 15px 0;
+        font-size: 1.1rem;
+        color: #333;
+    }
+
+    .legend-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .legend-color {
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+        border-radius: 4px;
+    }
+    .alert {
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 4px;
+    }
+    
+    .alert-warning {
+        background-color: #fff3cd;
+        border: 1px solid #ffeeba;
+        color: #856404;
+    }
+    
+    .alert-danger {
+        background-color: #f8d7da;
+        border: 1px solid #f5c6cb;
+        color: #721c24;
+    }
+    
+    .alert-success {
+        background-color: #d4edda;
+        border: 1px solid #c3e6cb;
+        color: #155724;
+    }
+    
+    .alert-info {
+        background-color: #d1ecf1;
+        border: 1px solid #bee5eb;
+        color: #0c5460;
+    }
+    
+    .button-group {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+        flex-wrap: wrap; /* Добавляем перенос строк */
+        max-width: 100%; /* Ограничиваем ширину контейнера */
+    }
+    
+    .danger-button {
+        background-color: #dc3545;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    
+    .danger-button:hover {
+        background-color: #c82333;
+    }
+    
+    .safe-button {
+        background-color: #28a745;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    
+    .safe-button:hover {
+        background-color: #218838;
+    }
+</style>
+
+<script>
+    let map;
+    let directionsService, directionsRenderer;
+    let dangerZones = [];
+    let currentMarker = null;
+    let markerType = null;
+    let startMarker = null;
+    let endMarker = null;
+    const apiKey = "ab3a442e3e33cb52dda464f495110325";
+    const weatherUrl = "http://api.openweathermap.org/data/2.5/weather";
+    const cities = [
+        { name: "Минск", lat: 53.9, lng: 27.5667 },
+        { name: "Брест", lat: 52.0976, lng: 23.7341 },
+        { name: "Витебск", lat: 55.1904, lng: 30.2049 },
+        { name: "Гомель", lat: 52.4412, lng: 30.9823 },
+        { name: "Могилёв", lat: 53.9007, lng: 30.3314 }
+    ];
+
+    function initMap() {
+        if (typeof google === 'undefined') {
+            setTimeout(initMap, 100);
+            return;
         }
 
-        async function fetchWeatherData() {
-            for (let city of cities) {
-                const url = `${weatherUrl}?lat=${city.lat}&lon=${city.lng}&appid=${apiKey}&units=metric`;
-                try {
-                    const response = await fetch(url);
-                    const data = await response.json();
-                    const dangerType = getDangerType(data);
-                    if (dangerType) {
-                        createDangerZone(city, dangerType);
-                    }
-                } catch (error) {
-                    console.error(`Ошибка при получении данных для ${city.name}:`, error);
+        map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 7,
+            center: { lat: 53.7098, lng: 27.9534 }
+        });
+
+        directionsService = new google.maps.DirectionsService();
+        directionsRenderer = new google.maps.DirectionsRenderer({
+            map: map,
+            suppressMarkers: true // ВАЖНО: не рисовать стандартные маркеры маршрута
+        });
+
+        fetchWeatherData();
+        addDemoZones();
+    }
+
+    async function fetchWeatherData() {
+        for (let city of cities) {
+            const url = `${weatherUrl}?lat=${city.lat}&lon=${city.lng}&appid=${apiKey}&units=metric`;
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                const dangerType = getDangerType(data);
+                if (dangerType) {
+                    createDangerZone(city, dangerType);
                 }
+            } catch (error) {
+                console.error(`Ошибка при получении данных для ${city.name}:`, error);
             }
         }
+    }
 
-        function getDangerType(weatherData) {
-            const temp = weatherData.main.temp;
-            if (temp > 30) return "highTemp";
-            if (temp < 0) return "lowTemp";
-            return null;
+    function getDangerType(weatherData) {
+        const temp = weatherData.main.temp;
+        if (temp > 30) return "highTemp";
+        if (temp < 0) return "lowTemp";
+        return null;
+    }
+
+    function createDangerZone(city, dangerType) {
+        const color = dangerType === "highTemp" ? "#FF0000" : "#808080";
+        const zone = new google.maps.Circle({
+            strokeColor: color,
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: color,
+            fillOpacity: 0.35,
+            map: map,
+            center: { lat: city.lat, lng: city.lng },
+            radius: 50000,
+            clickable: false, // <--- добавьте это
+            zIndex: 1         // <--- и это
+        });
+        dangerZones.push({ polygon: zone, type: dangerType });
+    }
+
+    function addDemoZones() {
+    // Пример зоны с высокой температурой (Гомель)
+    const gomelHighTemp = new google.maps.Circle({
+        strokeColor: "#FF0000",
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: "#FF0000",
+        fillOpacity: 0.35,
+        map: map,
+        center: { lat: 52.4412, lng: 30.9823 },
+        radius: 50000,
+        clickable: false,
+        zIndex: 1
+    });
+    dangerZones.push({ polygon: gomelHighTemp, type: "highTemp" });
+
+    // Пример зоны с низкой температурой (Витебск)
+    const vitebskLowTemp = new google.maps.Circle({
+        strokeColor: "#808080",
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: "#808080",
+        fillOpacity: 0.35,
+        map: map,
+        center: { lat: 55.1904, lng: 30.2049 },
+        radius: 50000,
+        clickable: false,
+        zIndex: 1
+    });
+    dangerZones.push({ polygon: vitebskLowTemp, type: "lowTemp" });
+}
+
+    function calculateRoute() {
+        if (!startMarker || !endMarker) {
+            alert("Пожалуйста, укажите начальную и конечную точки маршрута");
+            return;
         }
 
-        function createDangerZone(city, dangerType) {
-            const color = dangerType === "highTemp" ? "#FF0000" : "#808080";
-            const zone = new google.maps.Circle({
-                strokeColor: color,
-                strokeOpacity: 0.8,
-                strokeWeight: 2,
-                fillColor: color,
-                fillOpacity: 0.35,
-                map: map,
-                center: { lat: city.lat, lng: city.lng },
-                radius: 50000 
-            });
-            dangerZones.push({ polygon: zone, type: dangerType });
-        }
+        const start = startMarker.getPosition();
+        const end = endMarker.getPosition();
 
-        function addDemoZones() {
-            // Пример зоны с высокой температурой (Гомель)
-            const gomelHighTemp = new google.maps.Circle({
-                strokeColor: "#FF0000",
-                strokeOpacity: 0.8,
-                strokeWeight: 2,
-                fillColor: "#FF0000",
-                fillOpacity: 0.35,
-                map: map,
-                center: { lat: 52.4412, lng: 30.9823 },
-                radius: 50000
-            });
-            dangerZones.push({ polygon: gomelHighTemp, type: "highTemp" });
+        const request = {
+            origin: start,
+            destination: end,
+            travelMode: google.maps.TravelMode.DRIVING
+        };
 
-            // Пример зоны с низкой температурой (Витебск)
-            const vitebskLowTemp = new google.maps.Circle({
-                strokeColor: "#808080",
-                strokeOpacity: 0.8,
-                strokeWeight: 2,
-                fillColor: "#808080",
-                fillOpacity: 0.35,
-                map: map,
-                center: { lat: 55.1904, lng: 30.2049 },
-                radius: 50000
-            });
-            dangerZones.push({ polygon: vitebskLowTemp, type: "lowTemp" });
-        }
+        directionsService.route(request, (result, status) => {
+            if (status === google.maps.DirectionsStatus.OK) {
+                const route = result.routes[0];
+                const endLocation = route.legs[0].end_location;
 
-        function calculateRoute() {
-            const start = document.getElementById("start").value;
-            const end = document.getElementById("end").value;
+                // Перемещаем пользовательский маркер в точку, куда реально проложен маршрут
+                endMarker.setPosition(endLocation);
 
-            const request = {
-                origin: start,
-                destination: end,
-                travelMode: google.maps.TravelMode.DRIVING
-            };
-
-            directionsService.route(request, (result, status) => {
-                if (status === google.maps.DirectionsStatus.OK) {
-                    const endLocation = result.routes[0].legs[0].end_location;
-                    if (isInDangerZone(endLocation)) {
-                        document.getElementById("routeInfo").innerHTML = `
-                            Точка Б находится в опасной зоне!<br>
-                            <button onclick="buildDangerRoute('${start}', '${end}')">Проложить в опасную зону</button>
-                            <button onclick="offerSafeRoute('${start}', ${endLocation.lat()}, ${endLocation.lng()})">Выбрать безопасный маршрут</button>
-                        `;
-                    } else {
-                        directionsRenderer.setDirections(result);
-                        document.getElementById("routeInfo").innerHTML = "Маршрут построен в безопасную зона.";
-                    }
+                if (isInDangerZone(endLocation)) {
+                    showDangerConfirmation(result, start, endLocation);
                 } else {
-                    alert("Не удалось построить маршрут.");
-                }
-            });
-        }
-
-        function isInDangerZone(location) {
-            for (let zone of dangerZones) {
-                const distance = google.maps.geometry.spherical.computeDistanceBetween(location, zone.polygon.getCenter());
-                if (distance < zone.polygon.getRadius()) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        function buildDangerRoute(start, end) {
-            const request = {
-                origin: start,
-                destination: end,
-                travelMode: google.maps.TravelMode.DRIVING
-            };
-            directionsService.route(request, (result, status) => {
-                if (status === google.maps.DirectionsStatus.OK) {
                     directionsRenderer.setDirections(result);
-                    document.getElementById("routeInfo").innerHTML = "Маршрут проложен в опасную зону.";
+                    document.getElementById("routeInfo").innerHTML =
+                        '<div class="alert alert-success">Маршрут построен в безопасную зону.</div>';
                 }
-            });
-        }
-
-        function offerSafeRoute(start, lat, lng) {
-            const endLocation = new google.maps.LatLng(lat, lng);
-            const safePoint = findNearbySafePoint(endLocation);
-
-            if (safePoint) {
-                const safeRequest = {
-                    origin: start,
-                    destination: safePoint,
-                    travelMode: google.maps.TravelMode.DRIVING
-                };
-                directionsService.route(safeRequest, (result, status) => {
-                    if (status === google.maps.DirectionsStatus.OK) {
-                        directionsRenderer.setDirections(result);
-                        document.getElementById("routeInfo").innerHTML = "Предложен безопасный маршрут.";
-                    }
-                });
             } else {
-                alert("Не удалось найти безопасную зону.");
+                alert("Не удалось построить маршрут.");
             }
-        }
+        });
+    }
 
-        function findNearbySafePoint(location, step = 1000, maxRadius = 50000) {
-            for (let radius = step; radius <= maxRadius; radius += step) {
+    function showDangerConfirmation(result, start, endLocation) {
+        const dangerZoneType = getDangerZoneType(endLocation);
+        const warningMessage = dangerZoneType === "highTemp" ? 
+            "Внимание! Конечная точка находится в зоне высокой температуры (>30°C)." :
+            "Внимание! Конечная точка находится в зоне низкой температуры (<0°C).";
+
+        document.getElementById("routeInfo").innerHTML = `
+            <div class="alert alert-warning">
+                <p>${warningMessage}</p>
+                <p>Выберите действие:</p>
+                <div class="button-group">
+                    <button onclick="proceedWithDangerousRoute()" class="danger-button">
+                        Проложить маршрут в опасную зону
+                    </button>
+                    <button onclick="findSafeAlternative(startMarker.getPosition(), ${endLocation.lat()}, ${endLocation.lng()})" class="safe-button">
+                        Найти безопасный альтернативный маршрут
+                    </button>
+                </div>
+            </div>
+        `;
+
+        // Сохраняем опасный маршрут во временной переменной
+        window.temporaryDangerousRoute = result;
+    }
+
+    function proceedWithDangerousRoute() {
+        if (window.temporaryDangerousRoute) {
+            directionsRenderer.setDirections(window.temporaryDangerousRoute);
+            document.getElementById("routeInfo").innerHTML = 
+                '<div class="alert alert-danger">Маршрут проложен в опасную зону. Будьте осторожны!</div>';
+        }
+    }
+
+    function findNearbySafePoint(location, initialStep = 5000, maxRadius = 100000) {
+        // Массив углов для более плотного поиска
+        const angles = Array.from({ length: 16 }, (_, i) => i * (360 / 16));
+        
+        // Увеличиваем радиус поиска постепенно
+        for (let radius = initialStep; radius <= maxRadius; radius += initialStep) {
+            // Перебираем все углы для текущего радиуса
+            for (let angle of angles) {
+                const rad = angle * Math.PI / 180;
+                
+                // Вычисляем смещение в метрах
+                const dLat = (radius * Math.cos(rad)) / 111320;
+                const dLng = (radius * Math.sin(rad)) / (111320 * Math.cos(location.lat() * Math.PI / 180));
+                
+                // Создаем новую точку
                 const safePoint = new google.maps.LatLng(
-                    location.lat() + (radius / 111000),
-                    location.lng() + (radius / (111000 * Math.cos(location.lat() * Math.PI / 180))) // Смещение по долготе
+                    location.lat() + dLat,
+                    location.lng() + dLng
                 );
+
+                // Проверяем, находится ли точка вне опасной зоны
                 if (!isInDangerZone(safePoint)) {
+                    // УДАЛЕНО: создание зеленого маркера
                     return safePoint;
                 }
             }
-            return null;
+        }
+        return null;
+    }
+
+    function findSafeAlternative(start, lat, lng) {
+        const endLocation = new google.maps.LatLng(parseFloat(lat), parseFloat(lng));
+        // For start position, check if it's already a LatLng object
+        const startLocation = start instanceof google.maps.LatLng ? 
+            start : 
+            new google.maps.LatLng(startMarker.getPosition().lat(), startMarker.getPosition().lng());
+        
+        const safePoint = findNearbySafePoint(endLocation);
+
+        if (safePoint) {
+            const safeRequest = {
+                origin: startLocation,
+                destination: safePoint,
+                travelMode: google.maps.TravelMode.DRIVING
+            };
+
+            directionsService.route(safeRequest, (result, status) => {
+                if (status === google.maps.DirectionsStatus.OK) {
+                    directionsRenderer.setDirections(result);
+                    // Update end marker position
+                    if (endMarker) {
+                        endMarker.setPosition(safePoint);
+                    }
+                    const distance = Math.round(google.maps.geometry.spherical.computeDistanceBetween(endLocation, safePoint) / 1000);
+                    document.getElementById("routeInfo").innerHTML = `
+                        <div class="alert alert-info">
+                            <p>Найден безопасный альтернативный маршрут.</p>
+                            <p>Расстояние до безопасной точки: ${distance} км</p>
+                        </div>`;
+                } else {
+                    alert("Не удалось построить безопасный маршрут.");
+                }
+            });
+        } else {
+            alert("Не удалось найти безопасную альтернативную точку в пределах допустимого радиуса.");
+        }
+    }
+
+    function getDangerZoneType(location) {
+        for (let zone of dangerZones) {
+            const distance = google.maps.geometry.spherical.computeDistanceBetween(location, zone.polygon.getCenter());
+            if (distance < zone.polygon.getRadius()) {
+                return zone.type;
+            }
+        }
+        return null;
+    }
+
+    function isInDangerZone(location) {
+        for (let zone of dangerZones) {
+            const distance = google.maps.geometry.spherical.computeDistanceBetween(location, zone.polygon.getCenter());
+            if (distance < zone.polygon.getRadius()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function buildDangerRoute(start, end) {
+        const request = {
+            origin: start,
+            destination: end,
+            travelMode: google.maps.TravelMode.DRIVING
+        };
+        directionsService.route(request, (result, status) => {
+            if (status === google.maps.DirectionsStatus.OK) {
+                directionsRenderer.setDirections(result);
+                document.getElementById("routeInfo").innerHTML = "Маршрут проложен в опасную зону.";
+            }
+        });
+    }
+
+    function offerSafeRoute(start, lat, lng) {
+        const endLocation = new google.maps.LatLng(lat, lng);
+        const safePoint = findNearbySafePoint(endLocation);
+
+        if (safePoint) {
+            const safeRequest = {
+                origin: start,
+                destination: safePoint,
+                travelMode: google.maps.TravelMode.DRIVING
+            };
+            directionsService.route(safeRequest, (result, status) => {
+                if (status === google.maps.DirectionsStatus.OK) {
+                    directionsRenderer.setDirections(result);
+                    document.getElementById("routeInfo").innerHTML = "Предложен безопасный маршрут.";
+                }
+            });
+        } else {
+            alert("Не удалось найти безопасную зону.");
+        }
+    }
+
+    function findNearbySafePoint(location, initialStep = 5000, maxRadius = 100000) {
+    // Массив углов для более плотного поиска
+    const angles = Array.from({ length: 16 }, (_, i) => i * (360 / 16));
+    
+    // Увеличиваем радиус поиска постепенно
+    for (let radius = initialStep; radius <= maxRadius; radius += initialStep) {
+        // Перебираем все углы для текущего радиуса
+        for (let angle of angles) {
+            const rad = angle * Math.PI / 180;
+            
+            // Вычисляем смещение в метрах
+            const dLat = (radius * Math.cos(rad)) / 111320;
+            const dLng = (radius * Math.sin(rad)) / (111320 * Math.cos(location.lat() * Math.PI / 180));
+            
+            // Создаем новую точку
+            const safePoint = new google.maps.LatLng(
+                location.lat() + dLat,
+                location.lng() + dLng
+            );
+
+            // Проверяем, находится ли точка вне опасной зоны
+            if (!isInDangerZone(safePoint)) {
+                // Визуализация найденной безопасной точки (опционально)
+                new google.maps.Marker({
+                    position: safePoint,
+                    map: map,
+                    icon: {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        scale: 5,
+                        fillColor: "#00FF00",
+                        fillOpacity: 1,
+                        strokeWeight: 0
+                    }
+                });
+                
+                return safePoint;
+            }
+        }
+    }
+    return null;
+}
+
+    function enableMarkerPlacement(type) {
+        markerType = type;
+        map.setOptions({ draggableCursor: 'crosshair' });
+        
+        // Добавляем слушатель клика по карте
+        google.maps.event.addListenerOnce(map, 'click', function(event) {
+            placeMarker(event.latLng, type);
+            map.setOptions({ draggableCursor: null });
+        });
+    }
+
+    function placeMarker(location, type) {
+        const marker = new google.maps.Marker({
+            position: location,
+            map: map,
+            draggable: true
+        });
+
+        if (type === 'start') {
+            if (startMarker) startMarker.setMap(null);
+            startMarker = marker;
+            document.getElementById('start').value = `${location.lat()}, ${location.lng()}`;
+        } else {
+            if (endMarker) endMarker.setMap(null);
+            endMarker = marker;
+            document.getElementById('end').value = `${location.lat()}, ${location.lng()}`;
         }
 
-        window.onload = initMap;
-    </script>
+        // Обновление координат при перетаскивании маркера
+        marker.addListener('dragend', function() {
+            const newPos = marker.getPosition();
+            if (type === 'start') {
+                document.getElementById('start').value = `${newPos.lat()}, ${newPos.lng()}`;
+            } else {
+                document.getElementById('end').value = `${newPos.lat()}, ${newPos.lng()}`;
+            }
+        });
+    }
+
+    // Change the initialization approach
+    function loadGoogleMaps() {
+        const script = document.createElement('script');
+        script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyDGZIul-FiQBCypdWJsez87JrtRAFa1WYM&libraries=geometry&callback=initMap`;
+        script.async = true;
+        script.defer = true;
+        document.head.appendChild(script);
+    }
+
+    // Remove window.onload = initMap and replace with:
+    document.addEventListener('DOMContentLoaded', loadGoogleMaps);
+</script>
 </body>
-</html>

@@ -2,10 +2,123 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Главная";
 }
+
 <div class="py-8">
     <h1 class="text-3xl font-bold text-gray-900">Добро пожаловать на сайт МЧС БГТУ</h1>
     <p class="mt-4 text-lg text-gray-700">
         Наш отдел обеспечивает безопасность студентов и сотрудников университета. Ознакомьтесь с нашими программами,
         симулятором ЧС и интерактивными картами для подготовки к чрезвычайным ситуациям.
     </p>
+
+    <div class="mt-8">
+        <h2 class="text-2xl font-semibold text-gray-900 mb-4">Основные направления деятельности</h2>
+        <ul class="list-disc pl-5 text-gray-700">
+            <li>Разработка и реализация мероприятий по предупреждению чрезвычайных ситуаций.</li>
+            <li>Обучение студентов и сотрудников правилам поведения в ЧС.</li>
+            <li>Взаимодействие с другими службами и ведомствами в области безопасности.</li>
+            <li>Контроль за соблюдением норм и правил пожарной безопасности.</li>
+        </ul>
+    </div>
+
+    <div class="mt-8">
+        <h2 class="text-2xl font-semibold text-gray-900 mb-4">Важная информация</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">Действия при пожаре</h3>
+                <p class="text-gray-600">
+                    При возникновении пожара немедленно сообщите в службу МЧС по телефону 112.
+                    Эвакуируйтесь из здания, используя планы эвакуации.
+                </p>
+                <a href="/Home/Documents" class="mt-2 text-red-600 hover:underline block">Подробнее</a>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">План эвакуации</h3>
+                <p class="text-gray-600">
+                    Ознакомьтесь с планом эвакуации вашего корпуса и аудитории.
+                    В случае ЧС следуйте указаниям ответственных лиц.
+                </p>
+                <a href="/Home/Map" class="mt-2 text-red-600 hover:underline block">Посмотреть планы</a>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">Симулятор ЧС</h3>
+                <p class="text-gray-600">
+                    Протестируйте свои знания и навыки в симуляторе чрезвычайных ситуаций.
+                    Будьте готовы к любым неожиданностям!
+                </p>
+                <a href="/Home/Simulator" class="mt-2 text-red-600 hover:underline block">Запустить симулятор</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-8">
+        <h2 class="text-2xl font-semibold text-gray-900 mb-4">Наши ресурсы</h2>
+        <div class="grid md:grid-cols-2 gap-4">
+            <a href="/Home/Documents" class="bg-red-100 rounded p-4 hover:shadow-md transition-shadow duration-300">
+                <h3 class="text-lg font-semibold text-gray-900">Документы</h3>
+                <p class="text-gray-600 mt-2">
+                    Нормативные акты, инструкции и рекомендации по безопасности.
+                </p>
+            </a>
+            <a href="/Home/Map" class="bg-green-100 rounded p-4 hover:shadow-md transition-shadow duration-300">
+                <h3 class="text-lg font-semibold text-gray-900">Интерактивная карта</h3>
+                <p class="text-gray-600 mt-2">
+                    Карта университета с указанием путей эвакуации и мест расположения средств защиты.
+                </p>
+            </a>
+            <a href="/Home/Simulator" class="bg-blue-100 rounded p-4 hover:shadow-md transition-shadow duration-300">
+                <h3 class="text-lg font-semibold text-gray-900">Симулятор ЧС</h3>
+                <p class="text-gray-600 mt-2">
+                    Интерактивный симулятор для отработки действий в чрезвычайных ситуациях.
+                </p>
+            </a>
+            <a href="/Home/Contacts" class="bg-yellow-100 rounded p-4 hover:shadow-md transition-shadow duration-300">
+                <h3 class="text-lg font-semibold text-gray-900">Контакты</h3>
+                <p class="text-gray-600 mt-2">
+                    Контактная информация отдела МЧС БГТУ и других служб.
+                </p>
+            </a>
+        </div>
+    </div>
+
+    <div class="mt-8">
+        <h2 class="text-2xl font-semibold text-gray-900 mb-4">Новости</h2>
+        <div class="grid md:grid-cols-2 gap-4">
+            <div class="bg-gray-100 rounded p-4">
+                <h3 class="text-lg font-semibold text-gray-900">Тренировка по эвакуации</h3>
+                <p class="text-gray-600 mt-2">
+                    25 мая 2025 года прошла тренировка по эвакуации из учебного корпуса №1.
+                    В тренировке приняли участие студенты и сотрудники всех факультетов.
+                </p>
+                <span class="text-sm text-gray-500">26 мая 2025</span>
+            </div>
+            <div class="bg-gray-100 rounded p-4">
+                <h3 class="text-lg font-semibold text-gray-900">Новые инструкции по пожарной безопасности</h3>
+                <p class="text-gray-600 mt-2">
+                    Опубликованы обновленные инструкции по пожарной безопасности для студентов и сотрудников.
+                    Ознакомиться с инструкциями можно в разделе <a href="/Home/Documents" class="text-red-600 hover:underline">Документы</a>.
+                </p>
+                <span class="text-sm text-gray-500">20 мая 2025</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-8">
+        <h2 class="text-2xl font-semibold text-gray-900 mb-4">Дополнительная информация</h2>
+        <div class="grid md:grid-cols-2 gap-4">
+            <div>
+                <h3 class="text-lg font-semibold text-gray-900">Статистика происшествий</h3>
+                <p class="text-gray-600 mt-2">
+                    Статистика происшествий и чрезвычайных ситуаций в университете за последний год.
+                </p>
+                <a href="#" class="text-red-600 hover:underline">Подробнее</a>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold text-gray-900">Часто задаваемые вопросы</h3>
+                <p class="text-gray-600 mt-2">
+                    Ответы на часто задаваемые вопросы по безопасности и действиям в ЧС.
+                </p>
+                <a href="#" class="text-red-600 hover:underline">Перейти к вопросам</a>
+            </div>
+        </div>
+    </div>
 </div>

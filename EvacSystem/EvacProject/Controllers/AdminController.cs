@@ -221,6 +221,20 @@ namespace EvacProject.Controllers
                 return RedirectToAction("Login");
             }
 
+            var existingStudent = await _dbContext.Students
+                .FirstOrDefaultAsync(s => s.StudentNumber == student.StudentNumber);
+            if (existingStudent != null)
+            {
+                ModelState.AddModelError("StudentNumber", "Студент с таким номером уже существует");
+                ViewBag.Faculties = await _dbContext.Faculties
+                    .Select(f => new SelectListItem { Value = f.FacultyId.ToString(), Text = f.Name })
+                    .ToListAsync();
+                ViewBag.FormsOfStudy = await _dbContext.FormsOfStudy
+                    .Select(f => new SelectListItem { Value = f.FormOfStudyId.ToString(), Text = f.Name })
+                    .ToListAsync();
+                return View(student);
+            }
+
             // Преобразуем даты в UTC
             if (student.AdmissionDate.HasValue)
                 student.AdmissionDate = DateTime.SpecifyKind(student.AdmissionDate.Value, DateTimeKind.Utc);
@@ -245,6 +259,14 @@ namespace EvacProject.Controllers
                 .Select(f => new SelectListItem { Value = f.FormOfStudyId.ToString(), Text = f.Name })
                 .ToListAsync();
             return View(student);
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> CheckStudentNumber(string studentNumber)
+        {
+            var exists = await _dbContext.Students
+                .AnyAsync(s => s.StudentNumber == studentNumber);
+            return Json(exists);
         }
 
         [HttpGet]

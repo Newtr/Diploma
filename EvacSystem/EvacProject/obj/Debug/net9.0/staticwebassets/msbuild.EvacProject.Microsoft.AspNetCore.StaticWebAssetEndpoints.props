@@ -60,6 +60,18 @@
       <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"qszyczxu0n"},{"Name":"integrity","Value":"sha256-unEZOuSgvXgSlPvxdlv7T7dZE8oa2I1mShybL57veXE="},{"Name":"label","Value":"_content/EvacProject/css/HelpPanel.css"}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"2780"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022unEZOuSgvXgSlPvxdlv7T7dZE8oa2I1mShybL57veXE=\u0022"},{"Name":"Last-Modified","Value":"Mon, 26 May 2025 10:51:30 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/EvacProject/css/pages.99jzwa8oqf.css">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\pages.css'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"99jzwa8oqf"},{"Name":"integrity","Value":"sha256-PVS8qDdKCaxca5fyjJvjdAenNZAWXkxsfKaQwFk6g1M="},{"Name":"label","Value":"_content/EvacProject/css/pages.css"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"671"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022PVS8qDdKCaxca5fyjJvjdAenNZAWXkxsfKaQwFk6g1M=\u0022"},{"Name":"Last-Modified","Value":"Thu, 05 Jun 2025 10:17:05 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/EvacProject/css/pages.css">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\pages.css'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-PVS8qDdKCaxca5fyjJvjdAenNZAWXkxsfKaQwFk6g1M="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"671"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022PVS8qDdKCaxca5fyjJvjdAenNZAWXkxsfKaQwFk6g1M=\u0022"},{"Name":"Last-Modified","Value":"Thu, 05 Jun 2025 10:17:05 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/EvacProject/css/simulator.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\simulator.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>

@@ -33,5 +33,15 @@ namespace EvacProject.Controllers
         {
             return View();
         }
+
+        public IActionResult Statistics()
+        {
+            return View();
+        }
+
+        public IActionResult FAQ()
+        {
+            return View();
+        }
     }
 }

@@ -2,11 +2,45 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Контакты";
 }
-<div class="py-8">
-    <h1 class="text-3xl font-bold text-gray-900">Контакты</h1>
-    <p class="mt-4 text-lg text-gray-700">
-        Адрес: 220006, г. Минск, ул. Свердлова, 13а<br>
-        Телефон: +375 (17) 327-71-31<br>
-        Email: info@belstu.by
-    </p>
+
+<link href="~/css/pages.css" rel="stylesheet" />
+
+<div class="content-section">
+    <h1 class="page-title">Контакты</h1>
+
+    <div class="content-block">
+        <h2 class="section-title">Основные контакты</h2>
+        <p>
+            <strong>Адрес:</strong> 220006, г. Минск, ул. Свердлова, 13а<br />
+            <strong>Телефон:</strong> +375 (17) 327-71-31<br />
+            <strong>Email:</strong> <a href="mailto:info@belstu.by">info@belstu.by</a>
+        </p>
+    </div>
+
+    <div class="content-block">
+        <h2 class="section-title">Отдел МЧС БГТУ</h2>
+        <p>
+            <strong>Начальник отдела:</strong> Иванов Иван Иванович<br />
+            <strong>Телефон:</strong> +375 (17) 123-45-67<br />
+            <strong>Email:</strong> <a href="mailto:mchs@belstu.by">mchs@belstu.by</a><br />
+            <strong>Кабинет:</strong> 101, Главный корпус
+        </p>
+    </div>
+
+    <div class="content-block">
+        <h2 class="section-title">Другие службы</h2>
+        <p>
+            <strong>Приемная комиссия:</strong> +375 (17) 222-33-44<br />
+            <strong>Служба безопасности:</strong> +375 (17) 444-55-66<br />
+            <strong>Медицинский пункт:</strong> +375 (17) 555-66-77
+        </p>
+    </div>
+
+    <div class="content-block">
+        <h2 class="section-title">Обратная связь</h2>
+        <p>
+            Если у вас есть вопросы или предложения, свяжитесь с нами через форму обратной связи на сайте университета.
+        </p>
+        <a href="https://belstu.by/feedback" class="text-red-600 hover:underline">Перейти к форме обратной связи</a>
+    </div>
 </div>
